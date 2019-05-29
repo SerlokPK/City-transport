@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using WebApp.Models;
@@ -23,44 +24,19 @@ namespace WebApp.Controllers
             using (var dbContext = new ApplicationDbContext())
             {
                 Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
+
                 List<StationDbModel> stationDbModels = repository.GetAll().ToList();
+                var stations = Mapper.Map<List<Station>>(stationDbModels);
 
-                foreach (var stationDbModel in stationDbModels)
-                {
-                    var station = new Station()
-                    {
-                        Name = stationDbModel.Name,
-                        Address = stationDbModel.Address,
-                        X = stationDbModel.X,
-                        Y = stationDbModel.Y,
-                        Lines = new List<Line>()
-                    };
+                retVal.AddRange(stations);
+            }
 
-                    var lineDbModels = stationDbModel.StationLines.ToList();
-                    foreach (var lineDbModel in lineDbModels)
-                    {
-                        var line = new Line()
-                        {
-                            Number = lineDbModel.Line.Number,
-                            Stations = new List<Station>(),
-                        };
+            using (var dbContext = new ApplicationDbContext())
+            {
+                Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
 
-                        foreach (var lineStation in lineDbModel.Line.StationLines)
-                        {
-                            line.Stations.Add(new Station()
-                            {
-                                Address = lineStation.Station.Address,
-                                Name = lineStation.Station.Name,
-                                X = lineStation.Station.X,
-                                Y = lineStation.Station.Y
-                            });
-                        }
-
-                        station.Lines.Add(line);
-                    }
-
-                    retVal.Add(station);
-                }
+                List<LineDbModel> lineDbModels = repository.GetAll().ToList();
+                var lines = Mapper.Map<List<Line>>(lineDbModels);
             }
 
             return retVal;

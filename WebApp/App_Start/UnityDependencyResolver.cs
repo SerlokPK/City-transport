@@ -1,18 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.Http.Dependencies;
 using Unity;
-using Unity.Injection;
 using Unity.Lifetime;
-using WebApp.Models;
+using WebApp.AutoMapper;
 using WebApp.Persistence;
-using WebApp.Persistence.Repository;
 using WebApp.Persistence.UnitOfWork;
-using WebApp.Providers;
 
 namespace WebApp.App_Start
 {
@@ -67,7 +62,12 @@ namespace WebApp.App_Start
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-           
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<CityTransportProfile>();
+                cfg.ValidateInlineMaps = false;
+            });
+
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
         }
