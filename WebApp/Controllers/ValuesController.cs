@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using WebApp.Persistence.UnitOfWork;
+using WebApp.Models;
+using WebApp.Persistence;
+using WebApp.Persistence.Models;
+using WebApp.Persistence.Repository;
 
 namespace WebApp.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
         public ValuesController()
@@ -17,9 +16,54 @@ namespace WebApp.Controllers
         }
 
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<Station> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Station> retVal = new List<Station>();
+
+            using (var dbContext = new ApplicationDbContext())
+            {
+                Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
+                List<StationDbModel> stationDbModels = repository.GetAll().ToList();
+
+                foreach (var stationDbModel in stationDbModels)
+                {
+                    var station = new Station()
+                    {
+                        Name = stationDbModel.Name,
+                        Address = stationDbModel.Address,
+                        X = stationDbModel.X,
+                        Y = stationDbModel.Y,
+                        Lines = new List<Line>()
+                    };
+
+                    var lineDbModels = stationDbModel.StationLines.ToList();
+                    foreach (var lineDbModel in lineDbModels)
+                    {
+                        var line = new Line()
+                        {
+                            Number = lineDbModel.Line.Number,
+                            Stations = new List<Station>(),
+                        };
+
+                        foreach (var lineStation in lineDbModel.Line.StationLines)
+                        {
+                            line.Stations.Add(new Station()
+                            {
+                                Address = lineStation.Station.Address,
+                                Name = lineStation.Station.Name,
+                                X = lineStation.Station.X,
+                                Y = lineStation.Station.Y
+                            });
+                        }
+
+                        station.Lines.Add(line);
+                    }
+
+                    retVal.Add(station);
+                }
+            }
+
+            return retVal;
         }
 
         // GET api/values/5
