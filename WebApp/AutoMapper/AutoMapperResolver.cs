@@ -68,5 +68,17 @@ namespace WebApp.AutoMapper
 
             return retVal;
         }
+
+        public static List<string> ResloveDepartureDbModelToDeparture(ICollection<DeparturesDbModel> departures)
+        {
+            List<string> retVal = new List<string>();
+
+            foreach (var departure in departures)
+            {
+                retVal.Add(departure.Time.ToString("HH:mm"));
+            }
+
+            return retVal;
+        }
     }
 }
