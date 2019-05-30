@@ -8,6 +8,8 @@ import { FooterComponent } from './core/footer/footer.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { RidesComponent } from './pages/rides/rides.component';
 import { LineMapComponent } from './pages/line-map/line-map.component';
+import { RideLocationsComponent } from './pages/ride-locations/ride-locations.component';
+import { PriceListComponent } from './pages/price-list/price-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { LineMapComponent } from './pages/line-map/line-map.component';
     NavbarComponent,
     RidesComponent,
     LineMapComponent,
+    RideLocationsComponent,
+    PriceListComponent,
   ],
   imports: [
     BrowserModule,
