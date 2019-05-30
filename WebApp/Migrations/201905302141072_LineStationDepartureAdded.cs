@@ -3,7 +3,7 @@ namespace WebApp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class LinesStationsAdded : DbMigration
+    public partial class LineStationDepartureAdded : DbMigration
     {
         public override void Up()
         {
@@ -13,8 +13,23 @@ namespace WebApp.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Number = c.Int(nullable: false),
+                        Name = c.String(),
+                        LineType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DeparturesDbModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DayType = c.Int(nullable: false),
+                        Time = c.DateTime(nullable: false),
+                        LineDbModelId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.LineDbModels", t => t.LineDbModelId, cascadeDelete: true)
+                .Index(t => t.LineDbModelId);
             
             CreateTable(
                 "dbo.StationLineDbModels",
@@ -47,10 +62,13 @@ namespace WebApp.Migrations
         {
             DropForeignKey("dbo.StationLineDbModels", "StationId", "dbo.StationDbModels");
             DropForeignKey("dbo.StationLineDbModels", "LineId", "dbo.LineDbModels");
+            DropForeignKey("dbo.DeparturesDbModels", "LineDbModelId", "dbo.LineDbModels");
             DropIndex("dbo.StationLineDbModels", new[] { "LineId" });
             DropIndex("dbo.StationLineDbModels", new[] { "StationId" });
+            DropIndex("dbo.DeparturesDbModels", new[] { "LineDbModelId" });
             DropTable("dbo.StationDbModels");
             DropTable("dbo.StationLineDbModels");
+            DropTable("dbo.DeparturesDbModels");
             DropTable("dbo.LineDbModels");
         }
     }

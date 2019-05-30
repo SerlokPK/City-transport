@@ -264,16 +264,20 @@
     <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905291952504_LinesStationsAdded.cs" />
-    <Compile Include="Migrations\201905291952504_LinesStationsAdded.Designer.cs">
-      <DependentUpon>201905291952504_LinesStationsAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201905302141072_LineStationDepartureAdded.cs" />
+    <Compile Include="Migrations\201905302141072_LineStationDepartureAdded.Designer.cs">
+      <DependentUpon>201905302141072_LineStationDepartureAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Departure.cs" />
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\Requests\LinesRequest.cs" />
+    <Compile Include="Models\Requests\SchedulesRequest.cs" />
     <Compile Include="Models\Station.cs" />
+    <Compile Include="Persistence\Models\DeparturesDbModel.cs" />
     <Compile Include="Persistence\Models\LineDbModel.cs" />
     <Compile Include="Persistence\Models\StationDbModel.cs" />
     <Compile Include="Persistence\Models\StationLineDbModel.cs" />
@@ -383,8 +387,8 @@
     <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905291952504_LinesStationsAdded.resx">
-      <DependentUpon>201905291952504_LinesStationsAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905302141072_LineStationDepartureAdded.resx">
+      <DependentUpon>201905302141072_LineStationDepartureAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

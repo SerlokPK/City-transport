@@ -24,11 +24,18 @@ namespace WebApp.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<StationLineDbModel>().HasKey(c => new { c.StationId, c.LineId });
+            modelBuilder.Entity<StationLineDbModel>()
+                .HasKey(c => new { c.StationId, c.LineId });
 
-            modelBuilder.Entity<StationDbModel>().HasMany(sl => sl.StationLines).WithRequired().HasForeignKey(s => s.StationId);
+            modelBuilder.Entity<StationDbModel>()
+                .HasMany(sl => sl.StationLines)
+                .WithRequired()
+                .HasForeignKey(s => s.StationId);
 
-            modelBuilder.Entity<LineDbModel>().HasMany(sl => sl.StationLines).WithRequired().HasForeignKey(l => l.LineId);
+            modelBuilder.Entity<LineDbModel>()
+                .HasMany(sl => sl.StationLines)
+                .WithRequired()
+                .HasForeignKey(l => l.LineId);
         }
     }
 }

@@ -10,10 +10,14 @@ namespace WebApp.AutoMapper
         public CityTransportProfile()
         {
             CreateMap<StationDbModel, Station>()
-                .ForMember(dest => dest.Lines, opts => opts.MapFrom(s => ResloveStationLinesToLines(s.StationLines)));
+                .ForMember(dest => dest.Lines, opts => opts.MapFrom(src => ResloveStationLinesToLines(src.StationLines)));
 
             CreateMap<LineDbModel, Line>()
-                .ForMember(dest => dest.Stations, opts => opts.MapFrom(s => ResloveStationLinesToStations(s.StationLines)));
+                .ForMember(dest => dest.Stations, opts => opts.MapFrom(src => ResloveStationLinesToStations(src.StationLines)))
+                .ForMember(dest => dest.Departures, opts => opts.MapFrom(src => ""));
+
+            CreateMap<DeparturesDbModel, Departure>()
+                .ForMember(dest => dest.DeparturesAt, opts => opts.MapFrom(src => src.Time.ToString("HH:mm")));
         }
     }
 }

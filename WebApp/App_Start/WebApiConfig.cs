@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
+using System.Net.Http.Headers;
+using System.Web.Http;
 using Unity;
-using Unity.Lifetime;
 using WebApp.App_Start;
 
 namespace WebApp
@@ -22,6 +17,8 @@ namespace WebApp
             config.DependencyResolver = resolver;
 
             GlobalHost.DependencyResolver = new SignalRUnityDependencyResolver(container);
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
