@@ -26,7 +26,7 @@ namespace WebApp.Controllers
             {
                 Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
                 List<LineDbModel> lineDbModels = repository.Find(l => l.LineType == linesRequest.LineType).ToList();
-                return Mapper.Map<List<Line>>(lineDbModels);
+                return Mapper.Map<List<Line>>(lineDbModels);    //STATUS CODE!!!
             }
         }
 
@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             {
                 Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
                 List<StationDbModel> stationDbModel = repository.GetAll().ToList();
-                return Mapper.Map<List<Station>>(stationDbModel);
+                return Mapper.Map<List<Station>>(stationDbModel);   //STATUS CODE!!!
             }
         }
 
@@ -51,8 +51,7 @@ namespace WebApp.Controllers
                 Repository<DeparturesDbModel, int> repository = new Repository<DeparturesDbModel, int>(dbContext);
                 List<DeparturesDbModel> departuresDbModels = repository.Find(dp => dp.DayType == schedulesRequest.DayType
                                                                              && dp.LineDbModel.Number == schedulesRequest.LineNumber).ToList();
-                var maps = Mapper.Map<List<Departure>>(departuresDbModels);
-                return maps;
+                return Mapper.Map<List<Departure>>(departuresDbModels); //STATUS CODE!!!
             }
         }
 
