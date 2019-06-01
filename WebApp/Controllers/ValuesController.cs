@@ -27,8 +27,16 @@ namespace WebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
                 using (var dbContext = new ApplicationDbContext())
                 {
+                    dbContext.Configuration.LazyLoadingEnabled = false;
+                    dbContext.Configuration.ProxyCreationEnabled = false;
+
                     Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
                     List<LineDbModel> lineDbModels = repository.Find(l => l.LineType == linesRequest.LineType).ToList();
                     var maps = Mapper.Map<List<Line>>(lineDbModels);
@@ -49,6 +57,11 @@ namespace WebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
                 using (var dbContext = new ApplicationDbContext())
                 {
                     Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
@@ -71,6 +84,11 @@ namespace WebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
                 using (var dbContext = new ApplicationDbContext())
                 {
                     dbContext.Configuration.LazyLoadingEnabled = true;
@@ -99,6 +117,11 @@ namespace WebApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
                 using (var dbContext = new ApplicationDbContext())
                 {
                     Repository<VehicleDbModel, int> repository = new Repository<VehicleDbModel, int>(dbContext);
@@ -133,6 +156,15 @@ namespace WebApp.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        private Error GetErrorMessage()
+        {
+            var errorMessage = ModelState.Values.ToList()[0].Errors.FirstOrDefault(e => e.ErrorMessage != "")?.ErrorMessage;
+            return new Error()
+            {
+                ErrorMessage = errorMessage ?? "Bad request."
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using FluentValidation.WebApi;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Security.OAuth;
 using System.Net.Http.Headers;
 using System.Web.Http;
@@ -24,6 +25,7 @@ namespace WebApp
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            FluentValidationModelValidatorProvider.Configure(config);
 
             // Web API routes
             config.MapHttpAttributeRoutes();
