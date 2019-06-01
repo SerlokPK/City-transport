@@ -29,6 +29,9 @@ namespace WebApp.Controllers
             {
                 using (var dbContext = new ApplicationDbContext())
                 {
+                    dbContext.Configuration.LazyLoadingEnabled = false;
+                    dbContext.Configuration.ProxyCreationEnabled = false;
+
                     Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
                     List<LineDbModel> lineDbModels = repository.Find(l => l.LineType == linesRequest.LineType).ToList();
                     var maps = Mapper.Map<List<Line>>(lineDbModels);
