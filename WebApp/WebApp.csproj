@@ -268,6 +268,10 @@
     <Compile Include="Migrations\201905302141072_LineStationDepartureAdded.Designer.cs">
       <DependentUpon>201905302141072_LineStationDepartureAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906011323562_VehiclesAdded.cs" />
+    <Compile Include="Migrations\201906011323562_VehiclesAdded.Designer.cs">
+      <DependentUpon>201906011323562_VehiclesAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -276,12 +280,16 @@
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\Requests\LinesRequest.cs" />
     <Compile Include="Models\Requests\SchedulesRequest.cs" />
+    <Compile Include="Models\Requests\StationsRequest.cs" />
+    <Compile Include="Models\Requests\VehiclesRequest.cs" />
     <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Persistence\Models\DeparturesDbModel.cs" />
     <Compile Include="Persistence\Models\LineDbModel.cs" />
     <Compile Include="Persistence\Models\StationDbModel.cs" />
     <Compile Include="Persistence\Models\StationLineDbModel.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Models\VehicleDbModel.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
@@ -389,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905302141072_LineStationDepartureAdded.resx">
       <DependentUpon>201905302141072_LineStationDepartureAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906011323562_VehiclesAdded.resx">
+      <DependentUpon>201906011323562_VehiclesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

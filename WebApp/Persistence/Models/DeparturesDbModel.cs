@@ -15,6 +15,6 @@ namespace WebApp.Persistence.Models
         public DayType DayType { get; set; }
         public DateTime Time { get; set; }
         public int LineDbModelId { get; set; }
-        public LineDbModel LineDbModel { get; set; }
+        public virtual LineDbModel LineDbModel { get; set; }
     }
 }

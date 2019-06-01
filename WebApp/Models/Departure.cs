@@ -13,6 +13,6 @@ namespace WebApp.Models
 
         public string DeparturesAt { get; set; }
 
-        public int LineDbModelId { get; set; }
+        public Line Line { get; set; }
     }
 }

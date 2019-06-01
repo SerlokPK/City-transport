@@ -1,7 +1,11 @@
 namespace WebApp.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity.Migrations;
+    using System.Linq;
+    using WebApp.Models;
     using WebApp.Persistence;
     using WebApp.Persistence.Models;
     using WebApp.Persistence.Repository;
@@ -27,8 +31,8 @@ namespace WebApp.Migrations
                 var lineDbModel6 = new LineDbModel() { Name = "NASELJE-STRAND", Number = 8, LineType = LineType.URBAN };
                 var lineDbModel7 = new LineDbModel() { Name = "CENTAR-TELEP", Number = 12, LineType = LineType.URBAN };
                 var stationDbModel = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Zeleznicka", X = 100.100, Y = 5.5 };
-                var stationDbModel1 = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Kisacka", X = 200.200, Y = 10.10 };
-                var stationDbModel2 = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Centar", X = 300.300, Y = 15.15 };
+                var stationDbModel1 = new StationDbModel() { Address = "KisackaAdresa", Name = "Kisacka", X = 200.200, Y = 10.10 };
+                var stationDbModel2 = new StationDbModel() { Address = "CentarAdresa", Name = "Centar", X = 300.300, Y = 15.15 };
 
                 #region StationLineModels
                 Repository<StationLineDbModel, int> repository2 = new Repository<StationLineDbModel, int>(dbContext);
@@ -203,6 +207,43 @@ namespace WebApp.Migrations
                 #endregion
                 #endregion
 
+                #region Vehicles
+                Repository<VehicleDbModel, int> repository3 = new Repository<VehicleDbModel, int>(dbContext);
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.1, Y = 1.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.2, Y = 1.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.3, Y = 1.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.1, Y = 2.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.2, Y = 2.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.3, Y = 2.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.1, Y = 3.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.2, Y = 3.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.3, Y = 3.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.1, Y = 4.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.2, Y = 4.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.3, Y = 4.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.1, Y = 5.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.2, Y = 5.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.3, Y = 5.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.1, Y = 6.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.2, Y = 6.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.3, Y = 6.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.1, Y = 7.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.2, Y = 7.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.3, Y = 7.33 });
+
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.1, Y = 8.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.2, Y = 8.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.3, Y = 8.33 });
+
+                #endregion
+
                 dbContext.SaveChanges();
             }
 
@@ -212,7 +253,7 @@ namespace WebApp.Migrations
             //  to avoid creating duplicate seed data.
             try
             {
-                /*
+
                 if (!context.Roles.Any(r => r.Name == "Admin"))
                 {
                     var store = new RoleStore<IdentityRole>(context);
@@ -256,7 +297,7 @@ namespace WebApp.Migrations
                     userManager.Create(user);
                     userManager.AddToRole(user.Id, "AppUser");
                 }
-                */
+
             }
             catch (Exception e)
             {
