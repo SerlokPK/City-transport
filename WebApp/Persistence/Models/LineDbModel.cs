@@ -15,5 +15,6 @@ namespace WebApp.Persistence.Models
         public LineType LineType { get; set; }
         public virtual ICollection<DeparturesDbModel> Departures { get; set; }
         public virtual ICollection<StationLineDbModel> StationLines { get; set; }
+        public virtual ICollection<VehicleDbModel> Vehicles { get; set; }
     }
 }
