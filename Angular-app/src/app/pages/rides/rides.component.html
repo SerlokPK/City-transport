@@ -1,15 +1,36 @@
-<select class="browser-default custom-select">
-  <option selected>Red voznje</option>
+Red voznje: <select class="browser-default custom-select">
   <option value="1">Gradski</option>
   <option value="2">Prigradski</option>
 </select>
-<select class="browser-default custom-select">
-  <option selected>Dan</option>
+Dan: <select class="browser-default custom-select">
   <option value="1">Radni dan</option>
   <option value="2">Subota</option>
   <option value="3">Nedelja</option>
 </select>
-<select size=5 class="browser-default custom-select">
-  <option value="1">1 nes - nes</option>
-  <option value="2">2 ovo - ono</option>
+Linija: <select (change)="selectLine($event)" size=5 class="browser-default custom-select">
+  <option *ngFor='let line of lineList' [value]='line.id'>
+    {{line.lineNumber}} {{line.name}}
+  </option>
 </select>
+<button class='btn btn-primary' (click)='showDepartureTime()'>PRIKAZI</button>
+<div *ngIf='showTime'>
+  <div>
+    Linija: 1 KLISA-CENTAR
+  </div>
+  <table class="table table-bordered table-dark" width=100%>
+    <tbody>
+      <tr>
+        <th>SMER A</th>
+        <th>SMER B</th>
+      </tr>
+      <tr>
+        <td>
+          <span *ngFor='let time of this.selectedLine.departureTime'>{{time}}<br /></span>
+        </td>
+        <td>
+          <span *ngFor='let time of this.selectedLine.departureTime'>{{time}}<br /></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
