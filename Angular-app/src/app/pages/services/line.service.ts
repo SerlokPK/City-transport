@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Line } from '../classes/line';
-import { LineSearchResult } from '../classes/line-search-result';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+import { Schedule } from '../classes/schedule';
 
 const baseUrl = 'http://localhost:52295/api/';
 
@@ -11,17 +11,25 @@ const baseUrl = 'http://localhost:52295/api/';
   providedIn: 'root'
 })
 export class LineService {
-  private lineList: Line[] = [];
 
   constructor(private http: HttpClient) { }
 
-  getAllLines(LineType): Observable<LineSearchResult> {
-    const url = `${baseUrl}/values/lines?LineType= ${LineType}`;
-    return this.http.get(url)
-      .map(data => new LineSearchResult(data));
+  getAllLines(rideType: string): Observable<Line[]> {
+    const url = `${baseUrl}values/lines`;
+    const parameters = { lineType: rideType };
+    return this.http.get<Line[]>(url, { params: parameters });
   }
 
-  getLine(id: number): Line {
-    return this.lineList.find(x => x.id === id);
+  getLine(id: number, lineList: Line[]): Line {
+    return lineList.find(x => x.Id === id);
+  }
+
+  getSchedules(lineNumber: string, dayType: string) {
+    const url = `${baseUrl}values/schedules`;
+    const parameters = {
+      LineNumber: lineNumber,
+      DayType: dayType
+    };
+    return this.http.get<Schedule>(url, { params: parameters });
   }
 }
