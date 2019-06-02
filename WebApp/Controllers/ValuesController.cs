@@ -66,9 +66,9 @@ namespace WebApp.Controllers
                 {
                     Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
                     List<StationDbModel> stationDbModels = repository.Find(st => st.StationLines.Where(l => l.Line.Number == stationsRequest.LineNumber).Any()).ToList();
-                    var maps = Mapper.Map<List<Station>>(stationDbModels);
+                    var stations = Mapper.Map<List<Station>>(stationDbModels);
 
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
                 }
             }
             catch (Exception e)
@@ -94,13 +94,18 @@ namespace WebApp.Controllers
                     dbContext.Configuration.LazyLoadingEnabled = true;
                     dbContext.Configuration.ProxyCreationEnabled = true;
 
-                    Repository<DeparturesDbModel, int> repository = new Repository<DeparturesDbModel, int>(dbContext);
-                    List<DeparturesDbModel> departuresDbModels = repository.Find(dp => dp.DayType == schedulesRequest.DayType
+                    Repository<DepartureDbModel, int> repository = new Repository<DepartureDbModel, int>(dbContext);
+                    List<DepartureDbModel> departuresDbModels = repository.Find(dp => dp.DayType == schedulesRequest.DayType
                                                                                  && dp.LineDbModel.Number == schedulesRequest.LineNumber).ToList();
 
-                    var maps = Mapper.Map<List<Departure>>(departuresDbModels);
+                    var departures = Mapper.Map<List<Departure>>(departuresDbModels);
+                    var departureWrapper = new DepartureWrapper()
+                    {
+                        DirectionA = departures.Where(d => d.Direction == Direction.A).ToList(),
+                        DirectionB = departures.Where(d => d.Direction == Direction.B).ToList(),
+                    };
 
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, departureWrapper);
                 }
             }
             catch (Exception e)
@@ -110,7 +115,6 @@ namespace WebApp.Controllers
         }
 
         // GET api/values/vehicles
-
         [HttpGet]
         [Route("Vehicles")]
         public HttpResponseMessage GeVehicles(HttpRequestMessage request, VehiclesRequest schedulesRequest)
@@ -126,9 +130,38 @@ namespace WebApp.Controllers
                 {
                     Repository<VehicleDbModel, int> repository = new Repository<VehicleDbModel, int>(dbContext);
                     List<VehicleDbModel> vehicleDbModels = repository.Find(st => st.LineDbModel.Id == schedulesRequest.LineNumber).ToList();
-                    var maps = Mapper.Map<List<Vehicle>>(vehicleDbModels);
+                    var vehicles = Mapper.Map<List<Vehicle>>(vehicleDbModels);
 
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, vehicles);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // GET api/values/price
+        [HttpGet]
+        [Route("price")]
+        public HttpResponseMessage GetPrice(HttpRequestMessage request, PriceRequest schedulesRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<PriceDbModel, int> repository = new Repository<PriceDbModel, int>(dbContext);
+                    PriceDbModel priceDbModel = repository.Find(st => st.TicketType == schedulesRequest.TicketType
+                                                                            && st.PassengerType == schedulesRequest.PassengerType).First();
+
+                    var price = Mapper.Map<Price>(priceDbModel);
+
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, price);
                 }
             }
             catch (Exception e)

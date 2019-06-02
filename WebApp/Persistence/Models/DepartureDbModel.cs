@@ -9,9 +9,16 @@ namespace WebApp.Persistence.Models
         SUNDAY
     }
 
-    public class DeparturesDbModel
+    public enum Direction
+    {
+        A = 0,
+        B
+    }
+
+    public class DepartureDbModel
     {
         public int Id { get; set; }
+        public Direction Direction { get; set; }
         public DayType DayType { get; set; }
         public DateTime Time { get; set; }
         public int LineDbModelId { get; set; }

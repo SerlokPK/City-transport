@@ -13,7 +13,7 @@ namespace WebApp.Persistence.Models
         public int Number { get; set; }
         public string Name { get; set; }
         public LineType LineType { get; set; }
-        public virtual ICollection<DeparturesDbModel> Departures { get; set; }
+        public virtual ICollection<DepartureDbModel> Departures { get; set; }
         public virtual ICollection<StationLineDbModel> StationLines { get; set; }
         public virtual ICollection<VehicleDbModel> Vehicles { get; set; }
     }

@@ -284,21 +284,33 @@
     <Compile Include="Migrations\201906011323562_VehiclesAdded.Designer.cs">
       <DependentUpon>201906011323562_VehiclesAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906021024045_DeparturesDirectionAdded.cs" />
+    <Compile Include="Migrations\201906021024045_DeparturesDirectionAdded.Designer.cs">
+      <DependentUpon>201906021024045_DeparturesDirectionAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906021053232_PricelistAdded.cs" />
+    <Compile Include="Migrations\201906021053232_PricelistAdded.Designer.cs">
+      <DependentUpon>201906021053232_PricelistAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Departure.cs" />
+    <Compile Include="Models\DepartureWrapper.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\Price.cs" />
     <Compile Include="Models\Requests\LinesRequest.cs" />
+    <Compile Include="Models\Requests\PriceRequest.cs" />
     <Compile Include="Models\Requests\SchedulesRequest.cs" />
     <Compile Include="Models\Requests\StationsRequest.cs" />
     <Compile Include="Models\Requests\VehiclesRequest.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\Vehicle.cs" />
-    <Compile Include="Persistence\Models\DeparturesDbModel.cs" />
+    <Compile Include="Persistence\Models\DepartureDbModel.cs" />
     <Compile Include="Persistence\Models\LineDbModel.cs" />
+    <Compile Include="Persistence\Models\PriceDbModel.cs" />
     <Compile Include="Persistence\Models\StationDbModel.cs" />
     <Compile Include="Persistence\Models\StationLineDbModel.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -314,6 +326,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validatiors\LinesRequestValidator.cs" />
+    <Compile Include="Validatiors\PriceRequestValidator.cs" />
     <Compile Include="Validatiors\SchedulesRequestValidator.cs" />
     <Compile Include="Validatiors\StationsRequestValidator.cs" />
     <Compile Include="Validatiors\VehiclesRequestValidator.cs" />
@@ -417,6 +430,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906011323562_VehiclesAdded.resx">
       <DependentUpon>201906011323562_VehiclesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021024045_DeparturesDirectionAdded.resx">
+      <DependentUpon>201906021024045_DeparturesDirectionAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906021053232_PricelistAdded.resx">
+      <DependentUpon>201906021053232_PricelistAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

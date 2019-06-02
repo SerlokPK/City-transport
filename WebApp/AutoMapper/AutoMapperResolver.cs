@@ -69,7 +69,7 @@ namespace WebApp.AutoMapper
             return retVal;
         }
 
-        public static List<string> ResloveDepartureDbModelToDeparture(ICollection<DeparturesDbModel> departures)
+        public static List<string> ResloveDepartureDbModelToDeparture(ICollection<DepartureDbModel> departures)
         {
             List<string> retVal = new List<string>();
 
