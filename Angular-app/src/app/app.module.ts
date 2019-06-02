@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { LineService } from './pages/services/line.service';
+import { StationService } from './pages/services/station.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +31,7 @@ import { PriceListComponent } from './pages/price-list/price-list.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [LineService],
+  providers: [LineService, StationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

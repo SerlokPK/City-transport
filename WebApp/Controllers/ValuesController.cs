@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         // GET api/values/lines
         [HttpGet]
         [Route("Lines")]
-        public HttpResponseMessage GetLines(HttpRequestMessage request, LinesRequest linesRequest)
+        public HttpResponseMessage GetLines(HttpRequestMessage request, [FromUri]LinesRequest linesRequest)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace WebApp.Controllers
         // GET api/values/schedules
         [HttpGet]
         [Route("Schedules")]
-        public HttpResponseMessage GetSchedules(HttpRequestMessage request, SchedulesRequest schedulesRequest)
+        public HttpResponseMessage GetSchedules(HttpRequestMessage request, [FromUri]SchedulesRequest schedulesRequest)
         {
             try
             {

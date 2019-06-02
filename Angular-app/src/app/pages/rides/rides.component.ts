@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LineService } from '../services/line.service';
 import { Line } from '../classes/line';
+import { Schedule } from '../classes/schedule';
 
 @Component({
   selector: 'app-rides',
@@ -9,18 +10,22 @@ import { Line } from '../classes/line';
   styleUrls: ['./rides.component.css']
 })
 export class RidesComponent implements OnInit {
-  lineList: Line[];
+  lineList: Line[] = [];
   selectedLine: Line;
   showTime = false;
+  DirectionA: string[] = [];
+  DirectionB: string[] = [];
 
-  params = { LineType: 'URBAN' };
+  initialParams = {
+    lineType: 'URBAN'
+  };
 
   constructor(private lineService: LineService) { }
 
   ngOnInit() {
-    this.lineService.getAllLines(this.params.LineType).subscribe(
+    this.lineService.getAllLines(this.initialParams).subscribe(
       data => {
-        this.lineList = data.lineList;
+        this.lineList = data.map(x => new Line(x));
       },
       err => {
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
@@ -29,10 +34,19 @@ export class RidesComponent implements OnInit {
   }
 
   selectLine(event) {
-    this.selectedLine = this.lineService.getLine(parseInt(event.target.value, 10));
+    this.selectedLine = this.lineService.getLine(parseInt(event.target.value, 10), this.lineList);
   }
 
   showDepartureTime() {
+    this.lineService.getSchedules(this.selectedLine.Number.toString(), 'WORKDAY').subscribe(
+      data => {
+        this.DirectionA = data.DirectionA.map(x => x.DeparturesAt);
+        this.DirectionB = data.DirectionB.map(x => x.DeparturesAt);
+      },
+      err => {
+        console.log('Error while retrieving schedules from server. Reason: ', err.statusText);
+      }
+    );
     this.showTime = true;
   }
 }
