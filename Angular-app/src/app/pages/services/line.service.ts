@@ -14,8 +14,9 @@ export class LineService {
 
   constructor(private http: HttpClient) { }
 
-  getAllLines(parameters): Observable<Line[]> {
+  getAllLines(rideType: string): Observable<Line[]> {
     const url = `${baseUrl}values/lines`;
+    const parameters = { lineType: rideType };
     return this.http.get<Line[]>(url, { params: parameters });
   }
 

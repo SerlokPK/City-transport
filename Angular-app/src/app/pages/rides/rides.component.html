@@ -1,11 +1,12 @@
-Red voznje: <select class="browser-default custom-select">
-  <option selected value="1">Gradski</option>
-  <option value="2">Prigradski</option>
+Red voznje: <select (change)='selectRide($event)' class="browser-default custom-select">
+  <option *ngFor='let ride of rideTypes'>
+    {{ride}}
+  </option>
 </select>
-Dan: <select class="browser-default custom-select">
-  <option value="1">Radni dan</option>
-  <option value="2">Subota</option>
-  <option value="3">Nedelja</option>
+Dan: <select (change)='selectDay($event)' class="browser-default custom-select">
+  <option *ngFor='let day of dayTypes'>
+    {{day}}
+  </option>
 </select>
 Linija: <select #lineSelector (change)='selectLine($event)' size=5 class="browser-default custom-select">
   <option *ngFor='let line of lineList' [value]='line.Id'>
@@ -20,15 +21,15 @@ Linija: <select #lineSelector (change)='selectLine($event)' size=5 class="browse
   <table class="table table-bordered table-dark" width=100%>
     <tbody>
       <tr>
-        <th>SMER A</th>
-        <th>SMER B</th>
+        <th>SMER A: {{selectedLine.Name}}</th>
+        <th>SMER B: {{convertLineName(selectedLine.Name)}}</th>
       </tr>
       <tr>
         <td>
-          <span *ngFor='let time of this.DirectionA'>{{time}}<br /></span>
+          <span *ngFor='let time of this.directionA'>{{time}}<br /></span>
         </td>
         <td>
-          <span *ngFor='let time of this.DirectionB'>{{time}}<br /></span>
+          <span *ngFor='let time of this.directionB'>{{time}}<br /></span>
         </td>
       </tr>
     </tbody>
