@@ -14,6 +14,7 @@ namespace WebApp.Persistence
 
         public DbSet<LineDbModel> Lines { get; set; }
         public DbSet<StationDbModel> Stations { get; set; }
+        public DbSet<PriceDbModel> Prices { get; set; }
 
         public static ApplicationDbContext Create()
         {

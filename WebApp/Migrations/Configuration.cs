@@ -1,11 +1,7 @@
 namespace WebApp.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-    using WebApp.Models;
     using WebApp.Persistence;
     using WebApp.Persistence.Models;
     using WebApp.Persistence.Repository;
@@ -56,154 +52,154 @@ namespace WebApp.Migrations
 
                 #region Departures
                 #region workdays
-                Repository<DeparturesDbModel, int> repository = new Repository<DeparturesDbModel, int>(dbContext);
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                Repository<DepartureDbModel, int> repository = new Repository<DepartureDbModel, int>(dbContext);
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.WORKDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
                 #endregion
 
                 #region saturdays
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SATURDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
                 #endregion
 
                 #region sundays
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel1, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel2, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel3, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel4, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel5, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 10, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 11, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 12, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 13, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel6, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
 
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
-                dbContext.SaveChanges(); repository.Add(new DeparturesDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Direction = Direction.A, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
+                dbContext.SaveChanges(); repository.Add(new DepartureDbModel() { LineDbModel = lineDbModel7, DayType = DayType.SUNDAY, Direction = Direction.B, Time = new DateTime(2019, 1, 1, 14, 10, 10) });
                 #endregion
                 #endregion
 
@@ -244,6 +240,25 @@ namespace WebApp.Migrations
 
                 #endregion
 
+                #region Prices
+                Repository<PriceDbModel, int> repository4 = new Repository<PriceDbModel, int>(dbContext);
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Daily });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Daily });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Daily });
+
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Monthly });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Monthly });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Monthly });
+
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Yearly });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Yearly });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Yearly });
+
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Time });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Time });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Time });
+                #endregion
+
                 dbContext.SaveChanges();
             }
 
@@ -253,7 +268,7 @@ namespace WebApp.Migrations
             //  to avoid creating duplicate seed data.
             try
             {
-
+                /*
                 if (!context.Roles.Any(r => r.Name == "Admin"))
                 {
                     var store = new RoleStore<IdentityRole>(context);
@@ -297,7 +312,7 @@ namespace WebApp.Migrations
                     userManager.Create(user);
                     userManager.AddToRole(user.Id, "AppUser");
                 }
-
+                */
             }
             catch (Exception e)
             {

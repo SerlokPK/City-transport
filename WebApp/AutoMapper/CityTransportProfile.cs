@@ -16,12 +16,14 @@ namespace WebApp.AutoMapper
                 .ForMember(dest => dest.Stations, opts => opts.MapFrom(src => ResloveStationLinesToStations(src.StationLines)))
                 .ForMember(dest => dest.Departures, opts => opts.MapFrom(src => ""));
 
-            CreateMap<DeparturesDbModel, Departure>()
+            CreateMap<DepartureDbModel, Departure>()
                 .ForMember(dest => dest.DeparturesAt, opts => opts.MapFrom(src => src.Time.ToString("HH:mm")))
                 .ForMember(dest => dest.Line, opts => opts.MapFrom(src => Mapper.Map<Line>(src.LineDbModel)));
 
             CreateMap<VehicleDbModel, Vehicle>()
                 .ForMember(dest => dest.Line, opts => opts.MapFrom(src => Mapper.Map<Line>(src.LineDbModel)));
+
+            CreateMap<PriceDbModel, Price>();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace WebApp.Validatiors
     {
         public LinesRequestValidator()
         {
-            RuleFor(x => x.LineType).NotNull().WithMessage("Requested line type is not supported");
+            RuleFor(x => x.LineType).NotNull().WithMessage("Requested line type is not supported. Supported: URBAN, SUBURBAN.");
         }
     }
 }

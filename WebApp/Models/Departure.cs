@@ -11,6 +11,8 @@ namespace WebApp.Models
         [JsonConverter(typeof(StringEnumConverter))]
         public DayType DayType { get; set; }
 
+        public Direction Direction { get; set; }
+
         public string DeparturesAt { get; set; }
 
         public Line Line { get; set; }
