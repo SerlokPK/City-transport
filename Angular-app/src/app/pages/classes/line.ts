@@ -1,15 +1,15 @@
 export class Line {
-    id: number;
-    name: string;
-    lineNumber: number;
-    lineType: string;
-    departureTime: string[];
+    Id: number;
+    Name: string;
+    Number: number;
+    LineType: string;
+    DepartureTime: string[];
 
     constructor(line: Line) {
-        this.id = line.id;
-        this.name = line.name;
-        this.lineNumber = line.lineNumber;
-        this.lineType = line.lineType;
-        this.departureTime = line.departureTime;
+        this.Id = line.Id;
+        this.Name = line.Name;
+        this.Number = line.Number;
+        this.LineType = line.LineType;
+        this.DepartureTime = line.DepartureTime;
     }
 }

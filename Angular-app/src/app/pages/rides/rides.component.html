@@ -1,34 +1,35 @@
-Red voznje: <select class="browser-default custom-select">
-  <option value="1">Gradski</option>
-  <option value="2">Prigradski</option>
-</select>
-Dan: <select class="browser-default custom-select">
-  <option value="1">Radni dan</option>
-  <option value="2">Subota</option>
-  <option value="3">Nedelja</option>
-</select>
-Linija: <select (change)="selectLine($event)" size=5 class="browser-default custom-select">
-  <option *ngFor='let line of lineList' [value]='line.id'>
-    {{line.lineNumber}} {{line.name}}
+Red voznje: <select (change)='selectRide($event)' class="browser-default custom-select">
+  <option *ngFor='let ride of rideTypes'>
+    {{ride}}
   </option>
 </select>
-<button class='btn btn-primary' (click)='showDepartureTime()'>PRIKAZI</button>
+Dan: <select (change)='selectDay($event)' class="browser-default custom-select">
+  <option *ngFor='let day of dayTypes'>
+    {{day}}
+  </option>
+</select>
+Linija: <select #lineSelector (change)='selectLine($event)' size=5 class="browser-default custom-select">
+  <option *ngFor='let line of lineList' [value]='line.Id'>
+    {{line.Number}} {{line.Name}}
+  </option>
+</select>
+<button class='btn btn-primary' [disabled]='!selectedLine' (click)='showDepartureTime()'>PRIKAZI</button>
 <div *ngIf='showTime'>
   <div>
-    Linija: 1 KLISA-CENTAR
+    Linija: {{this.selectedLine.Number}} {{this.selectedLine.Name}}
   </div>
   <table class="table table-bordered table-dark" width=100%>
     <tbody>
       <tr>
-        <th>SMER A</th>
-        <th>SMER B</th>
+        <th>SMER A: {{selectedLine.Name}}</th>
+        <th>SMER B: {{convertLineName(selectedLine.Name)}}</th>
       </tr>
       <tr>
         <td>
-          <span *ngFor='let time of this.selectedLine.departureTime'>{{time}}<br /></span>
+          <span *ngFor='let time of this.directionA'>{{time}}<br /></span>
         </td>
         <td>
-          <span *ngFor='let time of this.selectedLine.departureTime'>{{time}}<br /></span>
+          <span *ngFor='let time of this.directionB'>{{time}}<br /></span>
         </td>
       </tr>
     </tbody>
