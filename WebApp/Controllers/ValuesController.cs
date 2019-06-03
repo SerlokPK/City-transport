@@ -81,7 +81,7 @@ namespace WebApp.Controllers
         // GET api/values/stations
         [HttpGet]
         [Route("Stations")]
-        public HttpResponseMessage GetStations(HttpRequestMessage request, StationsRequest stationsRequest)
+        public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]StationsRequest stationsRequest)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace WebApp.Controllers
         // GET api/values/schedules
         [HttpGet]
         [Route("Schedules")]
-        public HttpResponseMessage GetSchedules(HttpRequestMessage request, SchedulesRequest schedulesRequest)
+        public HttpResponseMessage GetSchedules(HttpRequestMessage request, [FromUri]SchedulesRequest schedulesRequest)
         {
             try
             {
@@ -145,7 +145,7 @@ namespace WebApp.Controllers
         // GET api/values/vehicles
         [HttpGet]
         [Route("Vehicles")]
-        public HttpResponseMessage GeVehicles(HttpRequestMessage request, VehiclesRequest schedulesRequest)
+        public HttpResponseMessage GeVehicles(HttpRequestMessage request, [FromUri]VehiclesRequest schedulesRequest)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace WebApp.Controllers
         // GET api/values/price
         [HttpGet]
         [Route("price")]
-        public HttpResponseMessage GetPrice(HttpRequestMessage request, PriceRequest schedulesRequest)
+        public HttpResponseMessage GetPrice(HttpRequestMessage request, [FromUri]PriceRequest schedulesRequest)
         {
             try
             {
