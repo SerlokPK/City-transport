@@ -50,8 +50,8 @@ export class LineMapComponent implements OnInit {
   placeMarker(station: Station) {
     const location = new google.maps.LatLng(station.X, station.Y);
     const iconImage = {
-      url: '../../../assets/Images/bus-station.svg',
-      scaledSize: new google.maps.Size(15, 15),
+      url: '../../../assets/Images/campground.svg',
+      scaledSize: new google.maps.Size(20, 20),
     };
     const marker = new google.maps.Marker({
       position: location,
