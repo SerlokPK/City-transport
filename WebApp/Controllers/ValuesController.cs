@@ -21,9 +21,37 @@ namespace WebApp.Controllers
         }
 
         // GET api/values/lines
+
         [HttpGet]
         [Route("Lines")]
-        public HttpResponseMessage GetLines(HttpRequestMessage request, LinesRequest linesRequest)
+        public HttpResponseMessage GetLines(HttpRequestMessage request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
+                    List<LineDbModel> lineDbModels = repository.GetAll().ToList();
+                    var maps = Mapper.Map<List<Line>>(lineDbModels);
+
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // GET api/values/lines/{lineType}
+        [HttpGet]
+        [Route("Lines/{lineType}")]
+        public HttpResponseMessage GetSpecificLines(HttpRequestMessage request, [FromUri]LinesRequest linesRequest)
         {
             try
             {

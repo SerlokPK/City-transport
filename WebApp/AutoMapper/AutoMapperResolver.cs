@@ -7,7 +7,7 @@ namespace WebApp.AutoMapper
 {
     public static class AutoMapperResolver
     {
-        public static List<Line> ResloveStationLinesToLines(ICollection<StationLineDbModel> stationLines)
+        public static List<Line> ResolveStationLinesToLines(ICollection<StationLineDbModel> stationLines)
         {
             List<Line> retVal = new List<Line>();
 
@@ -16,6 +16,7 @@ namespace WebApp.AutoMapper
                 var line = new Line()
                 {
                     Id = stationLineDbModel.Line.Id,
+                    Name = stationLineDbModel.Line.Name,
                     Number = stationLineDbModel.Line.Number,
                     Stations = new List<Station>()
                 };
@@ -38,7 +39,7 @@ namespace WebApp.AutoMapper
             return retVal;
         }
 
-        public static List<Station> ResloveStationLinesToStations(ICollection<StationLineDbModel> stationLines)
+        public static List<Station> ResolveStationLinesToStations(ICollection<StationLineDbModel> stationLines)
         {
             List<Station> retVal = new List<Station>();
 
