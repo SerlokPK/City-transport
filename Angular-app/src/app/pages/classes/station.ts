@@ -1,17 +1,19 @@
-import { DecimalPipe } from '@angular/common';
+import { Line } from './line';
 
 export class Station {
-    id: number;
-    name: string;
-    address: string;
-    longitude: number;
-    latitude: number;
+    Id: number;
+    Name: string;
+    Address: string;
+    X: number;
+    Y: number;
+    Lines: Line[] = [];
 
     constructor(station: Station) {
-        this.id = station.id;
-        this.address = station.address;
-        this.name = station.name;
-        this.longitude = station.longitude;
-        this.latitude = station.latitude;
+        this.Id = station.Id;
+        this.Address = station.Address;
+        this.Name = station.Name;
+        this.X = station.X;
+        this.Y = station.Y;
+        this.Lines = station.Lines;
     }
 }

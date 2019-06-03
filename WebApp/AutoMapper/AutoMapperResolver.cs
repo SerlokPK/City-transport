@@ -16,6 +16,7 @@ namespace WebApp.AutoMapper
                 var line = new Line()
                 {
                     Id = stationLineDbModel.Line.Id,
+                    Name= stationLineDbModel.Line.Name,
                     Number = stationLineDbModel.Line.Number,
                     Stations = new List<Station>()
                 };

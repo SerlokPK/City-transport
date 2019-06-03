@@ -53,7 +53,7 @@ namespace WebApp.Controllers
         // GET api/values/stations
         [HttpGet]
         [Route("Stations")]
-        public HttpResponseMessage GetStations(HttpRequestMessage request, StationsRequest stationsRequest)
+        public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]StationsRequest stationsRequest)
         {
             try
             {

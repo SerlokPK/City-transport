@@ -12,5 +12,11 @@ const baseUrl = 'http://localhost:52295/api/';
 export class StationService {
   private stationsList: Station[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getStationsByLineNumber(lineNumber: string): Observable<Station[]> {
+    const url = `${baseUrl}values/Stations`;
+    const parameters = { LineNumber: lineNumber };
+    return this.http.get<Station[]>(url, { params: parameters });
+  }
 }

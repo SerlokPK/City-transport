@@ -22,11 +22,11 @@ export class RidesComponent implements OnInit {
   constructor(private lineService: LineService) { }
 
   ngOnInit() {
-    this.getAllLines(this.rideType);
+    this.getAllLinesByRideType(this.rideType);
   }
 
-  getAllLines(rideType: string) {
-    this.lineService.getAllLines(rideType).subscribe(
+  getAllLinesByRideType(rideType: string) {
+    this.lineService.getAllLinesByRideType(rideType).subscribe(
       data => {
         this.lineList = data.map(x => new Line(x));
       },
@@ -37,8 +37,8 @@ export class RidesComponent implements OnInit {
   }
 
   selectRide(event) {
-    this.rideType = this.returnValidRideType(event.target.value);
-    this.getAllLines(this.rideType);
+    this.rideType = this.lineService.returnValidRideType(event.target.value);
+    this.getAllLinesByRideType(this.rideType);
   }
 
   selectLine(event) {
@@ -58,30 +58,12 @@ export class RidesComponent implements OnInit {
     this.showTime = true;
   }
 
-  selectDay(event) {
-    this.dayType = this.returnValidDayType(event.target.value);
-  }
-
   convertLineName(lineName: string) {
     const newName = lineName.split('-');
     return `${newName[1]}-${newName[0]}`;
   }
 
-  returnValidDayType(type: string) {
-    if (type === 'Radni dan') {
-      return 'WORKDAY';
-    } else if (type === 'Subota') {
-      return 'SATURDAY';
-    } else {
-      return 'SUNDAY';
-    }
-  }
-
-  returnValidRideType(type: string) {
-    if (type === 'Gradski') {
-      return 'URBAN';
-    } else {
-      return 'SUBURBAN';
-    }
+  selectDay(event) {
+    this.dayType = this.lineService.returnValidDayType(event.target.value);
   }
 }
