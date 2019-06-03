@@ -1,4 +1,6 @@
 <div class='row'>
-  <button>1</button>
+  <button *ngFor='let line of lineList' [value]='line.Number' (click)='showStations($event)'>
+    {{line.Number}}
+  </button>
 </div>
 <div #gmap style="width:100%;height:400px"></div>

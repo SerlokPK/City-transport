@@ -14,7 +14,7 @@ export class LineService {
 
   constructor(private http: HttpClient) { }
 
-  getAllLines(rideType: string): Observable<Line[]> {
+  getAllLinesByRideType(rideType: string): Observable<Line[]> {
     const url = `${baseUrl}values/lines`;
     const parameters = { lineType: rideType };
     return this.http.get<Line[]>(url, { params: parameters });
@@ -31,5 +31,23 @@ export class LineService {
       DayType: dayType
     };
     return this.http.get<Schedule>(url, { params: parameters });
+  }
+
+  returnValidDayType(type: string) {
+    if (type === 'Radni dan') {
+      return 'WORKDAY';
+    } else if (type === 'Subota') {
+      return 'SATURDAY';
+    } else {
+      return 'SUNDAY';
+    }
+  }
+
+  returnValidRideType(type: string) {
+    if (type === 'Gradski') {
+      return 'URBAN';
+    } else {
+      return 'SUBURBAN';
+    }
   }
 }
