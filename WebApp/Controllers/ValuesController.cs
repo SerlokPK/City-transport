@@ -21,9 +21,37 @@ namespace WebApp.Controllers
         }
 
         // GET api/values/lines
+
         [HttpGet]
         [Route("Lines")]
-        public HttpResponseMessage GetLines(HttpRequestMessage request, [FromUri]LinesRequest linesRequest)
+        public HttpResponseMessage GetLines(HttpRequestMessage request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
+                    List<LineDbModel> lineDbModels = repository.GetAll().ToList();
+                    var maps = Mapper.Map<List<Line>>(lineDbModels);
+
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // GET api/values/lines/{lineType}
+        [HttpGet]
+        [Route("Lines/{lineType}")]
+        public HttpResponseMessage GetSpecificLines(HttpRequestMessage request, [FromUri]LinesRequest linesRequest)
         {
             try
             {
@@ -117,7 +145,7 @@ namespace WebApp.Controllers
         // GET api/values/vehicles
         [HttpGet]
         [Route("Vehicles")]
-        public HttpResponseMessage GeVehicles(HttpRequestMessage request, VehiclesRequest schedulesRequest)
+        public HttpResponseMessage GeVehicles(HttpRequestMessage request, [FromUri]VehiclesRequest schedulesRequest)
         {
             try
             {
@@ -144,7 +172,7 @@ namespace WebApp.Controllers
         // GET api/values/price
         [HttpGet]
         [Route("price")]
-        public HttpResponseMessage GetPrice(HttpRequestMessage request, PriceRequest schedulesRequest)
+        public HttpResponseMessage GetPrice(HttpRequestMessage request, [FromUri]PriceRequest schedulesRequest)
         {
             try
             {
