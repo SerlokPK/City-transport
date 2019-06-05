@@ -15,6 +15,7 @@ import { LineMapComponent } from './pages/line-map/line-map.component';
 import { RideLocationsComponent } from './pages/ride-locations/ride-locations.component';
 import { PriceListComponent } from './pages/price-list/price-list.component';
 import { VehicleService } from './pages/services/vehicle.service';
+import { PriceService } from './pages/services/price.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { VehicleService } from './pages/services/vehicle.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [LineService, StationService, VehicleService],
+  providers: [LineService, StationService, VehicleService, PriceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

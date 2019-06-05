@@ -1,5 +1,5 @@
 <div class='row'>
-  <button *ngFor='let line of lineList' [value]='line.Number' (click)='showVehicles($event)'>
+  <button *ngFor='let line of lineList' [value]='line.Id' (click)='showVehicles($event)'>
     {{line.Number}}
   </button>
 </div>

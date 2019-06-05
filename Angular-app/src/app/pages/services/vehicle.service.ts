@@ -13,7 +13,7 @@ export class VehicleService {
 
   constructor(private http: HttpClient) { }
 
-  getStationsByLineNumber(lineNumber: string): Observable<Vehicle[]> {
+  getVehiclesByLineNumber(lineNumber: string): Observable<Vehicle[]> {
     const url = `${baseUrl}values/Vehicles`;
     const parameters = { LineNumber: lineNumber };
     return this.http.get<Vehicle[]>(url, { params: parameters });

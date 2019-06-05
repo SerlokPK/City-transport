@@ -1,11 +1,27 @@
-<select class="browser-default custom-select">
-  <option value="1">vremenska</option>
-  <option value="2">dnevna</option>
-  <option value="3">mesecna</option>
-  <option value="4">godisnja</option>
+Tip karte: <select class="browser-default custom-select" (change)='selectCard($event)'>
+  <option *ngFor='let card of cardTypes'>
+    {{card}}
+  </option>
 </select>
-<select class="browser-default custom-select">
-  <option value="1">djacka</option>
-  <option value="2">penzionerska</option>
-  <option value="3">regularna</option>
+Tip kupca: <select class="browser-default custom-select" (change)='selectPassenger($event)'>
+  <option *ngFor='let passenger of passengerTypes'>
+    {{passenger}}
+  </option>
 </select>
+<div>
+  {{this.selectedCard}} {{this.selectedPassenger}}
+</div>
+<table class="table table-bordered table-dark" width=100%>
+  <tbody>
+    <tr>
+      <th>Cena</th>
+      <th>PDV [%]</th>
+      <th>Ukupno</th>
+    </tr>
+    <tr>
+      <td>{{this.price.Cost}}</td>
+      <td>{{this.pdv}}</td>
+      <td>{{this.calculateFinalSum(this.price.Cost, this.pdv)}}</td>
+    </tr>
+  </tbody>
+</table>

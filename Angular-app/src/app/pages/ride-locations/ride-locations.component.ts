@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Line } from '../classes/line';
 import { LineService } from '../services/line.service';
 import { Vehicle } from '../classes/vehicle';
+import { VehicleService } from '../services/vehicle.service';
 
 @Component({
   selector: 'app-ride-locations',
@@ -15,15 +16,15 @@ export class RideLocationsComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
 
-  constructor(private lineService: LineService) { }
+  constructor(private lineService: LineService, private vehicleService: VehicleService) { }
 
   ngOnInit() {
     this.gmapInit();
     this.getAllLines();
   }
 
-  getAllLines() { // PROMENI NA GET ALL AKD DOBIJES S BACKA
-    this.lineService.getAllLinesByRideType('URBAN').subscribe(
+  getAllLines() {
+    this.lineService.getAllLines().subscribe(
       data => {
         this.lineList = data.map(x => new Line(x));
       },
@@ -35,20 +36,20 @@ export class RideLocationsComponent implements OnInit {
 
   showVehicles(event) {
     this.setMapOnAll(null);
-    // this.stationService.getStationsByLineNumber(event.target.value).subscribe(
-    //   data => {
-    //     data.map(x => this.placeMarker(new Station(x)));
-    //   },
-    //   err => {
-    //     console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
-    //   }
-    // );
+    this.vehicleService.getVehiclesByLineNumber(event.target.value).subscribe(
+      data => {
+        data.map(x => this.placeMarker(new Vehicle(x)));
+      },
+      err => {
+        console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
+      }
+    );
   }
 
   placeMarker(vehicle: Vehicle) {
     const location = new google.maps.LatLng(vehicle.X, vehicle.Y);
     const iconImage = {
-      url: '../../../assets/Images/campground.svg',
+      url: '../../../assets/Images/bus-station.svg',
       scaledSize: new google.maps.Size(20, 20),
     };
     const marker = new google.maps.Marker({

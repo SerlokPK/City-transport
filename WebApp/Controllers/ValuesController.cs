@@ -36,7 +36,7 @@ namespace WebApp.Controllers
                 using (var dbContext = new ApplicationDbContext())
                 {
                     Repository<LineDbModel, int> repository = new Repository<LineDbModel, int>(dbContext);
-                    List<LineDbModel> lineDbModels = repository.GetAll().ToList();
+                    List<LineDbModel> lineDbModels = repository.GetAll().OrderBy(x => x.Number).ToList();
                     var maps = Mapper.Map<List<Line>>(lineDbModels);
 
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);

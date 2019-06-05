@@ -24,8 +24,8 @@ export class LineMapComponent implements OnInit {
     this.getAllLines();
   }
 
-  getAllLines() { // PROMENI NA GET ALL AKD DOBIJES S BACKA
-    this.lineService.getAllLinesByRideType('URBAN').subscribe(
+  getAllLines() {
+    this.lineService.getAllLines().subscribe(
       data => {
         this.lineList = data.map(x => new Line(x));
       },
