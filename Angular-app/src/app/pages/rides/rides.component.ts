@@ -11,6 +11,7 @@ import { Line } from '../classes/line';
 export class RidesComponent implements OnInit {
   lineList: Line[] = [];
   selectedLine: Line;
+  tempLine: Line;
   showTime = false;
   directionA: string[] = [];
   directionB: string[] = [];
@@ -42,10 +43,11 @@ export class RidesComponent implements OnInit {
   }
 
   selectLine(event) {
-    this.selectedLine = this.lineService.getLine(parseInt(event.target.value, 10), this.lineList);
+    this.tempLine = this.lineService.getLine(parseInt(event.target.value, 10), this.lineList);
   }
 
   showDepartureTime() {
+    this.selectedLine = this.tempLine;
     this.lineService.getSchedules(this.selectedLine.Number.toString(), this.dayType).subscribe(
       data => {
         this.directionA = data.DirectionA.map(x => x.DeparturesAt);
@@ -60,6 +62,9 @@ export class RidesComponent implements OnInit {
 
   convertLineName(lineName: string) {
     const newName = lineName.split('-');
+    if (!newName[1]) {
+      return newName[0];
+    }
     return `${newName[1]}-${newName[0]}`;
   }
 

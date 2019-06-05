@@ -15,9 +15,14 @@ export class LineService {
   constructor(private http: HttpClient) { }
 
   getAllLinesByRideType(rideType: string): Observable<Line[]> {
-    const url = `${baseUrl}values/lines`;
+    const url = `${baseUrl}values/lines/${rideType}`;
     const parameters = { lineType: rideType };
     return this.http.get<Line[]>(url, { params: parameters });
+  }
+
+  getAllLines(): Observable<Line[]> {
+    const url = `${baseUrl}values/lines`;
+    return this.http.get<Line[]>(url);
   }
 
   getLine(id: number, lineList: Line[]): Line {

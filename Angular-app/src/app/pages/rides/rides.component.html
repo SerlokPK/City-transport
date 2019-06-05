@@ -8,12 +8,12 @@ Dan: <select (change)='selectDay($event)' class="browser-default custom-select">
     {{day}}
   </option>
 </select>
-Linija: <select #lineSelector (change)='selectLine($event)' size=5 class="browser-default custom-select">
+Linija: <select (change)='selectLine($event)' size=5 class="browser-default custom-select">
   <option *ngFor='let line of lineList' [value]='line.Id'>
     {{line.Number}} {{line.Name}}
   </option>
 </select>
-<button class='btn btn-primary' [disabled]='!selectedLine' (click)='showDepartureTime()'>PRIKAZI</button>
+<button class='btn btn-primary' [disabled]='!tempLine' (click)='showDepartureTime()'>PRIKAZI</button>
 <div *ngIf='showTime'>
   <div>
     Linija: {{this.selectedLine.Number}} {{this.selectedLine.Name}}
