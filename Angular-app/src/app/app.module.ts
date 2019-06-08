@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LineService } from './pages/services/line.service';
 import { StationService } from './pages/services/station.service';
@@ -16,6 +17,9 @@ import { RideLocationsComponent } from './pages/ride-locations/ride-locations.co
 import { PriceListComponent } from './pages/price-list/price-list.component';
 import { VehicleService } from './pages/services/vehicle.service';
 import { PriceService } from './pages/services/price.service';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ConfirmEqualValidatorDirective } from './pages/directives/confirm-equal-validator.directive';
 
 @NgModule({
   declarations: [
@@ -27,11 +31,15 @@ import { PriceService } from './pages/services/price.service';
     LineMapComponent,
     RideLocationsComponent,
     PriceListComponent,
+    RegisterComponent,
+    LoginComponent,
+    ConfirmEqualValidatorDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [LineService, StationService, VehicleService, PriceService],
   bootstrap: [AppComponent]
