@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LineService } from '../services/line.service';
 import { Line } from '../classes/line';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rides',
@@ -32,6 +33,12 @@ export class RidesComponent implements OnInit {
         this.lineList = data.map(x => new Line(x));
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );
@@ -54,6 +61,12 @@ export class RidesComponent implements OnInit {
         this.directionB = data.DirectionB.map(x => x.DeparturesAt);
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving schedules from server. Reason: ', err.statusText);
       }
     );

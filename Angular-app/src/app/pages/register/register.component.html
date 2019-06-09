@@ -1,0 +1,120 @@
+<div class="container">
+  <hr>
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Create Account</h4>
+      <p class="text-center">Get started with your free account</p>
+      <form [formGroup]='registerForm' (ngSubmit)='onSubmit()'>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+          </div>
+          <input formControlName="Email" class="form-control" placeholder="Email address" type="email">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Email').touched && registerForm.get('Email').hasError('required')">
+          Email is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Email').touched && !registerForm.get('Email').hasError('required') && registerForm.get('Email').hasError('pattern')">
+          Email format is invalid!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input formControlName="FirstName" class="form-control" placeholder="First name" type="text">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('FirstName').touched && registerForm.get('FirstName').hasError('required')">
+          First name is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('FirstName').touched && !registerForm.get('FirstName').hasError('required') && registerForm.get('FirstName').hasError('maxlength')">
+          Max length is 255!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          <input formControlName="LastName" class="form-control" placeholder="Last name" type="text">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('LastName').touched && registerForm.get('LastName').hasError('required')">
+          Last name is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('LastName').touched && !registerForm.get('LastName').hasError('required') && registerForm.get('LastName').hasError('maxlength')">
+          Max length is 255!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fas fa-address-card"></i> </span>
+          </div>
+          <input formControlName="Address" class="form-control" placeholder="Address" type="text">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Address').touched && registerForm.get('Address').hasError('required')">
+          Address is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Address').touched && !registerForm.get('Address').hasError('required') && registerForm.get('Address').hasError('maxlength')">
+          Max length is 255!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
+          </div>
+          <input formControlName="DayOfBirth" class="form-control" placeholder="Birthday" type="text">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('DayOfBirth').touched && registerForm.get('DayOfBirth').hasError('required')">
+          Birthday is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('DayOfBirth').touched && !registerForm.get('DayOfBirth').hasError('required') && registerForm.get('DayOfBirth').hasError('maxlength')">
+          Max length is 255!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input formControlName='Password' class="form-control" placeholder="Create password" type="password">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Password').touched && registerForm.get('Password').hasError('required')">
+          Password is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Password').touched && !registerForm.get('Password').hasError('required') && registerForm.get('Password').hasError('maxlength')">
+          Max length is 100!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('Password').touched && !registerForm.get('Password').hasError('required') && registerForm.get('Password').hasError('minlength')">
+          Min length is 6!
+        </span>
+        <!-- <span class='form-group hasError'
+          *ngIf="registerForm.get('Password').touched && !registerForm.get('Password').hasError('required') && !registerForm.get('Password').hasError('minlength') && registerForm.get('Password').hasError('pattern')">
+          Password must have at least one lower, upper case char, digit and special character!
+        </span> -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input formControlName='ConfirmPassword' class="form-control" placeholder="Confirm password" type="password">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="registerForm.get('ConfirmPassword').touched && !registerForm.get('ConfirmPassword').hasError('required') && registerForm.get('ConfirmPassword').hasError('notEqual')">
+          Confirm password and password doesn't match
+        </span>
+        <div class="form-group">
+          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-block"> Create Account
+          </button>
+        </div> <!-- form-group// -->
+        <p class="text-center">Have an account? <a href="/login">Log In</a> </p>
+      </form>
+    </article>
+  </div> <!-- card.// -->
+
+</div>
+<!--container end.//-->

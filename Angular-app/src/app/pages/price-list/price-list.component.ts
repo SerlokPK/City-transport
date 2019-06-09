@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Price } from '../classes/price';
 import { PriceService } from '../services/price.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-price-list',
@@ -47,6 +48,12 @@ export class PriceListComponent implements OnInit {
         this.price = new Price(data);
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );

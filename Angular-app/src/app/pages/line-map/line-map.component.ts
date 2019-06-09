@@ -4,6 +4,7 @@ import { LineService } from '../services/line.service';
 import { Line } from '../classes/line';
 import { Station } from '../classes/station';
 import { StationService } from '../services/station.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-line-map',
@@ -30,6 +31,12 @@ export class LineMapComponent implements OnInit {
         this.lineList = data.map(x => new Line(x));
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );
@@ -42,6 +49,12 @@ export class LineMapComponent implements OnInit {
         data.map(x => this.placeMarker(new Station(x)));
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );
@@ -71,6 +84,7 @@ export class LineMapComponent implements OnInit {
 
   markerHandler(station: Station) {
     alert('Marker\'s Title: ' + station.Address);
+    // DODAJ SWAL AKO STIGNES
   }
 
   gmapInit() {

@@ -323,7 +323,7 @@ namespace WebApp.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid)            // PROPERTIES ARE MADE, JUST PUT THEM IN MODEL (DON'T CHANGE NAMES BCUZ OF BINDING IN JS)
             {
                 return BadRequest(ModelState);
             }
