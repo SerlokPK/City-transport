@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { User } from '../classes/user';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.value.Password !== this.registerForm.value.ConfirmPassword) {
-      alert(`Password and confirm password doesn't match`);
+      swal.fire({
+        title: 'Greska!',
+        text: `Sifra i potvrdjena sifra se ne poklapaju`,
+        type: 'error',
+        confirmButtonText: 'Ok'
+      });
       return;
     }
     const user = new User(this.registerForm.value);
@@ -42,6 +48,12 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['login', { queryParams: { registered: 'true' } }]);
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving schedules from server. Reason: ', err.statusText);
       }
     );

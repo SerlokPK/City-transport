@@ -3,6 +3,7 @@ import { Line } from '../classes/line';
 import { LineService } from '../services/line.service';
 import { Vehicle } from '../classes/vehicle';
 import { VehicleService } from '../services/vehicle.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ride-locations',
@@ -29,6 +30,12 @@ export class RideLocationsComponent implements OnInit {
         this.lineList = data.map(x => new Line(x));
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );
@@ -41,6 +48,12 @@ export class RideLocationsComponent implements OnInit {
         data.map(x => this.placeMarker(new Vehicle(x)));
       },
       err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
         console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
       }
     );
@@ -68,7 +81,7 @@ export class RideLocationsComponent implements OnInit {
   }
 
   markerHandler(vehicle: Vehicle) {
-    alert('Marker\'s Title: ');
+    alert('Marker\'s Title: '); // ZAMENI S SWALOM
   }
 
   gmapInit() {
