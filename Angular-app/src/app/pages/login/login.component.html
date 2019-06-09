@@ -1,3 +1,46 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <hr>
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class=" card-title text-center mb-4 mt-1">Sign in</h4>
+      <form [formGroup]='loginForm' (ngSubmit)='onSubmit()'>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+          </div>
+          <input formControlName="Email" class="form-control" placeholder="Email address" type="email">
+        </div> <!-- form-group// -->
+        <span class='form-group hasError'
+          *ngIf="loginForm.get('Email').touched && loginForm.get('Email').hasError('required')">
+          Email is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="loginForm.get('Email').touched && !loginForm.get('Email').hasError('required') && loginForm.get('Email').hasError('pattern')">
+          Email format is invalid!
+        </span>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          <input class="form-control" formControlName='Password' placeholder="******" type="password">
+        </div> <!-- input-group.// -->
+        <span class='form-group hasError'
+          *ngIf="loginForm.get('Password').touched && loginForm.get('Password').hasError('required')">
+          Password is Required!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="loginForm.get('Password').touched && !loginForm.get('Password').hasError('required') && loginForm.get('Password').hasError('maxlength')">
+          Max length is 100!
+        </span>
+        <span class='form-group hasError'
+          *ngIf="loginForm.get('Password').touched && !loginForm.get('Password').hasError('required') && loginForm.get('Password').hasError('minlength')">
+          Min length is 6!
+        </span>
+        <div class="form-group">
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block"> Login </button>
+        </div> <!-- form-group// -->
+        <p class="text-center">Don't have an account? <a href="/register">Sign up</a> </p>
+      </form>
+    </article>
+  </div>
+</div>

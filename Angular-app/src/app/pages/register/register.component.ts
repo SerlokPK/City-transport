@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { confirmEqual } from '../directives/confirm-equal-validator.directive';
+import { User } from '../classes/user';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,23 +11,49 @@ import { confirmEqual } from '../directives/confirm-equal-validator.directive';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  password: string;
   registerForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    firstname: ['', [Validators.required, Validators.max(255)]],
-    lastname: ['', [Validators.required, Validators.max(255)]],
-    password: ['', [Validators.required, Validators.max(100)]],
-    confirmPassword: ['', [Validators.required, confirmEqual(this.password)]],
-    address: ['', [Validators.required, Validators.max(255)]],
-    birthday: ['', [Validators.required, Validators.max(255)]]
+    Email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')]],
+    FirstName: ['', [Validators.required, Validators.maxLength(255)]],
+    LastName: ['', [Validators.required, Validators.maxLength(255)]],
+    // tslint:disable-next-line: max-line-length
+    Password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)]],
+    ConfirmPassword: ['', [Validators.required, (control => this.confirmPassword(control, this.registerForm, 'Password'))]],
+    Address: ['', [Validators.required, Validators.maxLength(255)]],
+    DayOfBirth: ['', [Validators.required, Validators.maxLength(255)]]
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    alert('radi bato');
+    if (this.registerForm.value.Password !== this.registerForm.value.ConfirmPassword) {
+      alert(`Password and confirm password doesn't match`);
+      return;
+    }
+    const user = new User(this.registerForm.value);
+    this.registerUser(user);
+  }
+
+  registerUser(user: User) {
+    this.userService.registerUser(user).subscribe(
+      data => {
+        this.router.navigate(['login', { queryParams: { registered: 'true' } }]);
+      },
+      err => {
+        console.log('Error while retrieving schedules from server. Reason: ', err.statusText);
+      }
+    );
+  }
+
+  confirmPassword(control: FormControl, group: FormGroup, matchPassword: string) {
+    if (!group) {
+      return;
+    }
+    if (control.value && group.controls[matchPassword].value !== control.value) {
+      return { notEqual: true };
+    }
+    return null;
   }
 }

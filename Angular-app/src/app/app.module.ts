@@ -5,6 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { LineService } from './pages/services/line.service';
 import { StationService } from './pages/services/station.service';
+import { UserService } from './pages/services/user.service';
+import { VehicleService } from './pages/services/vehicle.service';
+import { PriceService } from './pages/services/price.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,11 +18,9 @@ import { RidesComponent } from './pages/rides/rides.component';
 import { LineMapComponent } from './pages/line-map/line-map.component';
 import { RideLocationsComponent } from './pages/ride-locations/ride-locations.component';
 import { PriceListComponent } from './pages/price-list/price-list.component';
-import { VehicleService } from './pages/services/vehicle.service';
-import { PriceService } from './pages/services/price.service';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ConfirmEqualValidatorDirective } from './pages/directives/confirm-equal-validator.directive';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +34,6 @@ import { ConfirmEqualValidatorDirective } from './pages/directives/confirm-equal
     PriceListComponent,
     RegisterComponent,
     LoginComponent,
-    ConfirmEqualValidatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,8 @@ import { ConfirmEqualValidatorDirective } from './pages/directives/confirm-equal
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [LineService, StationService, VehicleService, PriceService],
+  providers: [LineService, StationService, VehicleService, PriceService,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
