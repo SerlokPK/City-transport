@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using WebApp.Models.Requests;
+using WebApp.Models.Requests.Get;
 
 namespace WebApp.Validatiors
 {
-    public class VehiclesRequestValidator : AbstractValidator<VehiclesRequest>
+    public class GetStationsRequestValidator : AbstractValidator<GetStationsRequest>
     {
-        public VehiclesRequestValidator()
+        public GetStationsRequestValidator()
         {
             RuleFor(x => x.LineNumber).NotNull().WithMessage("Line number format is not valid.");
             RuleFor(x => x.LineNumber).GreaterThan(0).WithMessage("Only positive numbers are allowed.");

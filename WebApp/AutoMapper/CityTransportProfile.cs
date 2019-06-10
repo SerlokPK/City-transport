@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using WebApp.Models;
+using WebApp.Models.Requests.Post;
 using WebApp.Persistence.Models;
 using static WebApp.AutoMapper.AutoMapperResolver;
 
@@ -9,6 +10,7 @@ namespace WebApp.AutoMapper
     {
         public CityTransportProfile()
         {
+            #region Get
             CreateMap<StationDbModel, Station>()
                 .ForMember(dest => dest.Lines, opts => opts.MapFrom(src => ResolveStationLinesToLines(src.StationLines)));
 
@@ -24,6 +26,16 @@ namespace WebApp.AutoMapper
                 .ForMember(dest => dest.Line, opts => opts.MapFrom(src => Mapper.Map<Line>(src.LineDbModel)));
 
             CreateMap<PriceDbModel, Price>();
+            #endregion
+
+            #region Post
+            CreateMap<PostLineRequest, LineDbModel>()
+                .ForMember(dest => dest.Departures, opts => opts.Ignore())
+                .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.StartLocation + "-" + src.EndLocation));
+
+            CreateMap<PostStationRequest, StationDbModel>();
+            #endregion
+
         }
     }
 }

@@ -2,10 +2,10 @@
 using WebApp.Persistence.Models;
 using WebApp.Validatiors;
 
-namespace WebApp.Models.Requests
+namespace WebApp.Models.Requests.Get
 {
-    [Validator(typeof(LinesRequestValidator))]
-    public class LinesRequest
+    [Validator(typeof(GetLinesRequestValidator))]
+    public class GetLinesRequest
     {
         public LineType? LineType { get; set; }
     }

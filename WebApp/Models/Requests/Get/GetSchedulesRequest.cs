@@ -2,10 +2,10 @@
 using WebApp.Persistence.Models;
 using WebApp.Validatiors;
 
-namespace WebApp.Models.Requests
+namespace WebApp.Models.Requests.Get
 {
-    [Validator(typeof(SchedulesRequestValidator))]
-    public class SchedulesRequest
+    [Validator(typeof(GetSchedulesRequestValidator))]
+    public class GetSchedulesRequest
     {
         public int? LineNumber { get; set; }
         public DayType? DayType { get; set; }

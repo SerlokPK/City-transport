@@ -269,6 +269,7 @@ namespace WebApp.Migrations
             try
             {
                 /*
+
                 if (!context.Roles.Any(r => r.Name == "Admin"))
                 {
                     var store = new RoleStore<IdentityRole>(context);
