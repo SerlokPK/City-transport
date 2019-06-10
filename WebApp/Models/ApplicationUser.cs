@@ -2,12 +2,9 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace WebApp.Models
 {
@@ -21,6 +18,14 @@ namespace WebApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string DayOfBirth { get; set; }
+
+        public string Address { get; set; }
 
         public static string HashPassword(string password)
         {

@@ -2,10 +2,10 @@
 using WebApp.Persistence.Models;
 using WebApp.Validatiors;
 
-namespace WebApp.Models.Requests
+namespace WebApp.Models.Requests.Get
 {
-    [Validator(typeof(PriceRequestValidator))]
-    public class PriceRequest
+    [Validator(typeof(GetPriceRequestValidator))]
+    public class GetPriceRequest
     {
         public PassengerType? PassengerType { get; set; }
         public TicketType? TicketType { get; set; }

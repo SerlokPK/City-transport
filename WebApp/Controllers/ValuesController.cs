@@ -5,10 +5,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using WebApp.Models;
-using WebApp.Models.Requests;
+using WebApp.Models.Requests.Get;
+using WebApp.Models.Requests.Post;
 using WebApp.Persistence;
 using WebApp.Persistence.Models;
 using WebApp.Persistence.Repository;
+using static WebApp.AutoMapper.AutoMapperResolver;
 
 namespace WebApp.Controllers
 {
@@ -51,7 +53,7 @@ namespace WebApp.Controllers
         // GET api/values/lines/{lineType}
         [HttpGet]
         [Route("Lines/{lineType}")]
-        public HttpResponseMessage GetSpecificLines(HttpRequestMessage request, [FromUri]LinesRequest linesRequest)
+        public HttpResponseMessage GetSpecificLines(HttpRequestMessage request, [FromUri]GetLinesRequest linesRequest)
         {
             try
             {
@@ -78,10 +80,83 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Lines")]
+        public HttpResponseMessage PostLine(HttpRequestMessage request, PostLineRequest lineRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    dbContext.Configuration.LazyLoadingEnabled = false;
+                    dbContext.Configuration.ProxyCreationEnabled = false;
+
+                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
+                    Repository<StationDbModel, int> stationsRepository = new Repository<StationDbModel, int>(dbContext);
+                    Repository<StationLineDbModel, int> stationLineRepository = new Repository<StationLineDbModel, int>(dbContext);
+                    Repository<DepartureDbModel, int> departuresRepository = new Repository<DepartureDbModel, int>(dbContext);
+
+                    var lineDbModel = Mapper.Map<LineDbModel>(lineRequest);
+
+                    var departures = ResolveDeparturePostRequestToDepartureDbModel(lineRequest.Departures, lineDbModel);
+
+                    foreach (var stationId in lineRequest.Stations)
+                    {
+                        var stationDbModel = stationsRepository.Get(stationId);
+                        stationLineRepository.Add(new StationLineDbModel()
+                        {
+                            Line = lineDbModel,
+                            Station = stationDbModel
+                        });
+                    }
+
+                    departuresRepository.AddRange(departures);
+                    dbContext.SaveChanges();
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, lineRequest);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // GET api/values/stations
+        [HttpGet]
+        [Route("Stations/{lineNumber}")]
+        public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]GetStationsRequest stationsRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<StationDbModel, int> repository = new Repository<StationDbModel, int>(dbContext);
+                    List<StationDbModel> stationDbModels = repository.GetAll().ToList();
+                    var stations = Mapper.Map<List<Station>>(stationDbModels);
+
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
         // GET api/values/stations
         [HttpGet]
         [Route("Stations")]
-        public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]StationsRequest stationsRequest)
+        public HttpResponseMessage GetSepcificStations(HttpRequestMessage request, [FromUri]GetStationsRequest stationsRequest)
         {
             try
             {
@@ -108,7 +183,7 @@ namespace WebApp.Controllers
         // GET api/values/schedules
         [HttpGet]
         [Route("Schedules")]
-        public HttpResponseMessage GetSchedules(HttpRequestMessage request, [FromUri]SchedulesRequest schedulesRequest)
+        public HttpResponseMessage GetSchedules(HttpRequestMessage request, [FromUri]GetSchedulesRequest schedulesRequest)
         {
             try
             {
@@ -145,7 +220,7 @@ namespace WebApp.Controllers
         // GET api/values/vehicles
         [HttpGet]
         [Route("Vehicles")]
-        public HttpResponseMessage GeVehicles(HttpRequestMessage request, [FromUri]VehiclesRequest schedulesRequest)
+        public HttpResponseMessage GeVehicles(HttpRequestMessage request, [FromUri]GetVehiclesRequest schedulesRequest)
         {
             try
             {
@@ -172,7 +247,7 @@ namespace WebApp.Controllers
         // GET api/values/price
         [HttpGet]
         [Route("price")]
-        public HttpResponseMessage GetPrice(HttpRequestMessage request, [FromUri]PriceRequest schedulesRequest)
+        public HttpResponseMessage GetPrice(HttpRequestMessage request, [FromUri]GetPriceRequest schedulesRequest)
         {
             try
             {

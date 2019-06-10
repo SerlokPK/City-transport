@@ -292,6 +292,10 @@
     <Compile Include="Migrations\201906021053232_PricelistAdded.Designer.cs">
       <DependentUpon>201906021053232_PricelistAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906101839323_UserInformationUpdated.cs" />
+    <Compile Include="Migrations\201906101839323_UserInformationUpdated.Designer.cs">
+      <DependentUpon>201906101839323_UserInformationUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -301,11 +305,14 @@
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\Price.cs" />
-    <Compile Include="Models\Requests\LinesRequest.cs" />
-    <Compile Include="Models\Requests\PriceRequest.cs" />
-    <Compile Include="Models\Requests\SchedulesRequest.cs" />
-    <Compile Include="Models\Requests\StationsRequest.cs" />
-    <Compile Include="Models\Requests\VehiclesRequest.cs" />
+    <Compile Include="Models\Requests\Get\GetLinesRequest.cs" />
+    <Compile Include="Models\Requests\Get\GetPriceRequest.cs" />
+    <Compile Include="Models\Requests\Get\GetSchedulesRequest.cs" />
+    <Compile Include="Models\Requests\Get\GetStationsRequest.cs" />
+    <Compile Include="Models\Requests\Get\GetVehiclesRequest.cs" />
+    <Compile Include="Models\Requests\Post\DeparturePostRequest.cs" />
+    <Compile Include="Models\Requests\Post\PostLineRequest.cs" />
+    <Compile Include="Models\Requests\Post\PostStationRequest.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Persistence\Models\DepartureDbModel.cs" />
@@ -325,11 +332,11 @@
     <Compile Include="Providers\CustomOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validatiors\LinesRequestValidator.cs" />
-    <Compile Include="Validatiors\PriceRequestValidator.cs" />
-    <Compile Include="Validatiors\SchedulesRequestValidator.cs" />
-    <Compile Include="Validatiors\StationsRequestValidator.cs" />
-    <Compile Include="Validatiors\VehiclesRequestValidator.cs" />
+    <Compile Include="Validatiors\Get\GetLinesRequestValidator.cs" />
+    <Compile Include="Validatiors\Get\GetPriceRequestValidator.cs" />
+    <Compile Include="Validatiors\Get\GetSchedulesRequestValidator.cs" />
+    <Compile Include="Validatiors\Get\GetStationsRequestValidator.cs" />
+    <Compile Include="Validatiors\Get\GetVehiclesRequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -436,6 +443,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906021053232_PricelistAdded.resx">
       <DependentUpon>201906021053232_PricelistAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101839323_UserInformationUpdated.resx">
+      <DependentUpon>201906101839323_UserInformationUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
