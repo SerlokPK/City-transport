@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebApp.Models;
+using WebApp.Models.Requests.Post;
 using WebApp.Persistence.Models;
 
 namespace WebApp.AutoMapper
@@ -80,6 +82,37 @@ namespace WebApp.AutoMapper
             }
 
             return retVal;
+        }
+
+        public static List<DateTime> ResloveTimeStringToTime(List<string> times)
+        {
+            List<DateTime> retVal = new List<DateTime>();
+
+            foreach (var time in times)
+            {
+                var hourSecond = time.Split(':');
+                retVal.Add(new DateTime(2019, 1, 1, int.Parse(hourSecond[0]), int.Parse(hourSecond[1]), 1));
+            }
+
+            return retVal;
+        }
+
+        public static IEnumerable<DepartureDbModel> ResolveDeparturePostRequestToDepartureDbModel(List<DeparturePostRequest> departurePostRequests, LineDbModel lineDbModel)
+        {
+            foreach (var departure in departurePostRequests)
+            {
+                foreach (var time in departure.DepartureTimes)
+                {
+                    var hourSecond = time.Split(':');
+                    yield return new DepartureDbModel()
+                    {
+                        LineDbModel = lineDbModel,
+                        Direction = departure.Direction,
+                        DayType = departure.DayType,
+                        Time = new DateTime(2019, 1, 1, int.Parse(hourSecond[0]), int.Parse(hourSecond[1]), 1)
+                    };
+                }
+            }
         }
     }
 }
