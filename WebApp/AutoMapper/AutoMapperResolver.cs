@@ -97,7 +97,7 @@ namespace WebApp.AutoMapper
             return retVal;
         }
 
-        public static IEnumerable<DepartureDbModel> ResolveDeparturePostRequestToDepartureDbModel(List<DeparturePostRequest> departurePostRequests, LineDbModel lineDbModel)
+        public static IEnumerable<DepartureDbModel> ResolveDeparturePostRequestToDepartureDbModel(List<PostDepartureRequest> departurePostRequests, LineDbModel lineDbModel)
         {
             foreach (var departure in departurePostRequests)
             {
