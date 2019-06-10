@@ -1,0 +1,52 @@
+<form [formGroup]='addLineForm' (ngSubmit)='onSaveLine()' class="text-center border border-light">
+  <p class="h4 mb-4">Dodaj liniju</p>
+  <input type="text" formControlName='StartLocation' class="form-control mb-4" placeholder="Pocetna lokacija">
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('StartLocation').touched && addLineForm.get('StartLocation').hasError('required')">
+    Pocetna lokacija je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('StartLocation').touched && !addLineForm.get('StartLocation').hasError('required') && addLineForm.get('StartLocation').hasError('maxlength')">
+    Max length is 100!
+  </span>
+  <input type="text" formControlName='EndLocation' class="form-control mb-4" placeholder="Krajnja lokacija">
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('EndLocation').touched && addLineForm.get('EndLocation').hasError('required')">
+    Krajnja lokacija je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('EndLocation').touched && !addLineForm.get('EndLocation').hasError('required') && addLineForm.get('EndLocation').hasError('maxlength')">
+    Max length is 100!
+  </span>
+  <input type="number" formControlName='Number' class="form-control mb-4" placeholder="Broj linije">
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('Number').touched && addLineForm.get('Number').hasError('required')">
+    Broj linije je obavezan!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('Number').touched && !addLineForm.get('Number').hasError('required') && addLineForm.get('Number').hasError('max')">
+    Max number is 1000!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addLineForm.get('Number').touched && !addLineForm.get('Number').hasError('required') && addLineForm.get('Number').hasError('min')">
+    Min number is 1!
+  </span>
+  Red voznje: <select formControlName='LineType' class="browser-default custom-select">
+    <option *ngFor='let ride of rideTypes'>
+      {{ride}}
+    </option>
+  </select>
+  Stanice: <ng-multiselect-dropdown [placeholder]="'Stanice'" [data]="dropdownList" formControlName="SelectedItems"
+    [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
+  </ng-multiselect-dropdown>
+  Radni dan:
+  <input type="text" formControlName='WorkLineA' class="form-control mb-4" placeholder="Polasci za smer A">
+  <input type="text" formControlName='WorkLineB' class="form-control mb-4" placeholder="Polasci za smer B">
+  Subota:
+  <input type="text" formControlName='SatLineA' class="form-control mb-4" placeholder="Polasci za smer A">
+  <input type="text" formControlName='SatLineB' class="form-control mb-4" placeholder="Polasci za smer B">
+  Nedelja:
+  <input type="text" formControlName='SunLineA' class="form-control mb-4" placeholder="Polasci za smer A">
+  <input type="text" formControlName='SunLineB' class="form-control mb-4" placeholder="Polasci za smer B">
+  <button class="btn btn-info btn-block my-4" [disabled]='!addLineForm.valid' type="submit">Sacuvaj</button>
+</form>
