@@ -25,7 +25,7 @@ export class LinesComponent implements OnInit {
     StartLocation: ['', [Validators.required, Validators.maxLength(255)]],
     EndLocation: ['', [Validators.required, Validators.maxLength(255)]],
     Number: ['', [Validators.required, Validators.max(1000), Validators.min(1)]],
-    LineType: ['', Validators.required],
+    LineType: [''],
     SelectedItems: [''],
     WorkLineA: [''],
     WorkLineB: [''],
@@ -41,8 +41,8 @@ export class LinesComponent implements OnInit {
     this.getAllStations();
     this.dropdownSettings = {
       singleSelection: false,
-      // idField: 'item_id',
-      // textField: 'item_text',
+      idField: 'Id',
+      textField: 'Name',
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
@@ -53,7 +53,7 @@ export class LinesComponent implements OnInit {
     this.stationsService.getAllStations().subscribe(
       data => {
         this.stationList = data.map(x => new Station(x));
-        this.dropdownList = this.stationList;
+        this.dropdownList = this.stationList.map(x => new Station(x));
       },
       err => {
         swal.fire({
@@ -101,12 +101,13 @@ export class LinesComponent implements OnInit {
     const satdayDepB = this.lineService.filterDepartures(this.addLineForm.value.SatLineB);
     const sundayDepA = this.lineService.filterDepartures(this.addLineForm.value.SunLineA);
     const sundayDepB = this.lineService.filterDepartures(this.addLineForm.value.SunLineB);
+    const stationIds = this.selectedItems.map(x => x.Id);
     const line = {
       LineId: 0,
       StartLocation: this.addLineForm.value.StartLocation,
       EndLocation: this.addLineForm.value.EndLocation,
       LineType: this.lineService.returnValidRideType(this.addLineForm.value.LineType),
-      Stations: this.selectedItems,
+      Stations: stationIds,
       Number: this.addLineForm.value.Number,
       Departures: [
         {
