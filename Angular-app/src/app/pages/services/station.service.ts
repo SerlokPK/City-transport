@@ -17,4 +17,9 @@ export class StationService {
     const parameters = { LineNumber: lineNumber };
     return this.http.get<Station[]>(url, { params: parameters });
   }
+
+  getAllStations() {
+    const url = `${baseUrl}values/Stations`;
+    return this.http.get<Station[]>(url);
+  }
 }

@@ -15,6 +15,7 @@ import { StationService } from 'src/app/pages/services/station.service';
 export class LinesComponent implements OnInit {
   rideTypes: string[] = ['Gradski', 'Prigradski'];
   lineList: Line[] = [];
+  stationList: Station[] = [];
   rideType = 'URBAN';
   dropdownList = []; // Station[] = [];
   selectedItems = []; // Station[] = [];
@@ -37,7 +38,7 @@ export class LinesComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private lineService: LineService, private stationsService: StationService) { }
 
   ngOnInit() {
-    this.dropdownList = ['prva', 'druga', 'treca'];
+    this.getAllStations();
     this.dropdownSettings = {
       singleSelection: false,
       // idField: 'item_id',
@@ -45,6 +46,42 @@ export class LinesComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    this.getAllLines();
+  }
+
+  getAllStations() {
+    this.stationsService.getAllStations().subscribe(
+      data => {
+        this.stationList = data.map(x => new Station(x));
+        this.dropdownList = this.stationList;
+      },
+      err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
+        console.log('Error while retrieving all stations from server. Reason: ', err.statusText);
+      }
+    );
+  }
+
+  getAllLines() {
+    this.lineService.getAllLines().subscribe(
+      data => {
+        this.lineList = data.map(x => new Line(x));
+      },
+      err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
+        console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
+      }
+    );
   }
 
   onItemSelect(item: any) {
@@ -65,6 +102,7 @@ export class LinesComponent implements OnInit {
     const sundayDepA = this.lineService.filterDepartures(this.addLineForm.value.SunLineA);
     const sundayDepB = this.lineService.filterDepartures(this.addLineForm.value.SunLineB);
     const line = {
+      LineId: 0,
       StartLocation: this.addLineForm.value.StartLocation,
       EndLocation: this.addLineForm.value.EndLocation,
       LineType: this.lineService.returnValidRideType(this.addLineForm.value.LineType),
@@ -109,6 +147,7 @@ export class LinesComponent implements OnInit {
   saveLine(line: any) {
     this.lineService.saveLine(line).subscribe(
       data => {
+        // line.LineId = data.
         swal.fire({
           title: 'Linija sacuvana!',
           type: 'success',

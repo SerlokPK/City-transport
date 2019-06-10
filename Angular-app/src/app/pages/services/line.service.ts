@@ -39,7 +39,7 @@ export class LineService {
   }
 
   saveLine(line: any) {
-    const url = `${baseUrl}values/schedules`;
+    const url = `${baseUrl}values/Lines`;
     return this.http.post<any>(url, line);
   }
 

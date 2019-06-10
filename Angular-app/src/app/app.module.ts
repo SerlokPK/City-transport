@@ -20,10 +20,10 @@ import { RidesComponent } from './pages/rides/rides.component';
 import { LineMapComponent } from './pages/line-map/line-map.component';
 import { RideLocationsComponent } from './pages/ride-locations/ride-locations.component';
 import { PriceListComponent } from './pages/price-list/price-list.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LinesComponent } from './admin/lines/lines.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({
