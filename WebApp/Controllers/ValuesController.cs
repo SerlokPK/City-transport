@@ -128,7 +128,7 @@ namespace WebApp.Controllers
 
         // GET api/values/stations
         [HttpGet]
-        [Route("Stations/{lineNumber}")]
+        [Route("Stations")]
         public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]GetStationsRequest stationsRequest)
         {
             try
@@ -155,7 +155,7 @@ namespace WebApp.Controllers
 
         // GET api/values/stations
         [HttpGet]
-        [Route("Stations")]
+        [Route("Stations/{lineNumber}")]
         public HttpResponseMessage GetSepcificStations(HttpRequestMessage request, [FromUri]GetStationsRequest stationsRequest)
         {
             try
