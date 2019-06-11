@@ -369,25 +369,57 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET api/values/5
-        public string Get(int id)
+        [HttpPost]
+        [Route("Price")]
+        public HttpResponseMessage PostPrice(HttpRequestMessage request, PostPriceRequest postPriceRequest)
         {
-            return "value";
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<PriceDbModel, int> repository = new Repository<PriceDbModel, int>(dbContext);
+                    var priceDbModel = Mapper.Map<PriceDbModel>(postPriceRequest);
+                    repository.Add(priceDbModel);
+                    dbContext.SaveChanges();
+
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        [HttpPut]
+        [Route("Price")]
+        public HttpResponseMessage PutPrice(HttpRequestMessage request, PriceDbModel priceDbModel)
         {
-        }
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<PriceDbModel, int> repository = new Repository<PriceDbModel, int>(dbContext);
+                    repository.Update(priceDbModel);
+                    dbContext.SaveChanges();
 
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         private Error GetErrorMessage()
