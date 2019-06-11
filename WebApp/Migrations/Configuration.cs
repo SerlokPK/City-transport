@@ -1,7 +1,11 @@
 namespace WebApp.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity.Migrations;
+    using System.Linq;
+    using WebApp.Models;
     using WebApp.Persistence;
     using WebApp.Persistence.Models;
     using WebApp.Persistence.Repository;
@@ -268,7 +272,7 @@ namespace WebApp.Migrations
             //  to avoid creating duplicate seed data.
             try
             {
-                /*
+
 
                 if (!context.Roles.Any(r => r.Name == "Admin"))
                 {
@@ -313,7 +317,7 @@ namespace WebApp.Migrations
                     userManager.Create(user);
                     userManager.AddToRole(user.Id, "AppUser");
                 }
-                */
+
             }
             catch (Exception e)
             {
