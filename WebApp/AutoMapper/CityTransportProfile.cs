@@ -35,7 +35,6 @@ namespace WebApp.AutoMapper
 
             CreateMap<PostStationRequest, StationDbModel>();
             #endregion
-
         }
     }
 }
