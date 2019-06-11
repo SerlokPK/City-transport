@@ -300,8 +300,8 @@ namespace WebApp.Controllers
                     var departures = Mapper.Map<List<Departure>>(departuresDbModels);
                     var departureWrapper = new DepartureWrapper()
                     {
-                        DirectionA = departures.Where(d => d.Direction == Direction.A).ToList(),
-                        DirectionB = departures.Where(d => d.Direction == Direction.B).ToList(),
+                        DirectionA = departures.Where(d => d.Direction == Direction.A).OrderBy(dep => dep.DeparturesAt).ToList(),
+                        DirectionB = departures.Where(d => d.Direction == Direction.B).OrderBy(dep => dep.DeparturesAt).ToList(),
                     };
 
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, departureWrapper);
