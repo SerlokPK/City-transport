@@ -43,6 +43,11 @@ export class LineService {
     return this.http.post<any>(url, line);
   }
 
+  updateLine(line: any) {
+    const url = `${baseUrl}values/Lines`;
+    return this.http.put<any>(url, line);
+  }
+
   filterDepartures(departures: string) {
     const departureArray = departures.split(' ');
     const regexExp = new RegExp('^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$');
@@ -67,5 +72,25 @@ export class LineService {
     } else {
       return 'SUBURBAN';
     }
+  }
+
+  convertToFrontRideType(type: string) {
+    if (type === 'URBAN') {
+      return 'Gradski';
+    } else {
+      return 'Prigradski';
+    }
+  }
+
+  convertLineNames(lineName: string) {
+    const newName = this.splitName(lineName);
+    if (!newName[1]) {
+      return newName[0];
+    }
+    return `${newName[1]}-${newName[0]}`;
+  }
+
+  splitName(name: string) {
+    return name.split('-');
   }
 }

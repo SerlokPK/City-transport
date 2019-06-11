@@ -16,10 +16,11 @@ export class LinesComponent implements OnInit {
   rideTypes: string[] = ['Gradski', 'Prigradski'];
   lineList: Line[] = [];
   stationList: Station[] = [];
-  rideType = 'URBAN';
+  selectedLine: Line;
   dropdownList = []; // Station[] = [];
   selectedItems = []; // Station[] = [];
   dropdownSettings = {};
+  showEditor = false;
 
   addLineForm = this.formBuilder.group({
     StartLocation: ['', [Validators.required, Validators.maxLength(255)]],
@@ -35,6 +36,13 @@ export class LinesComponent implements OnInit {
     SunLineB: [''],
   });
 
+  updateLineForm = this.formBuilder.group({
+    StartLocation: ['', [Validators.required, Validators.maxLength(255)]],
+    EndLocation: ['', [Validators.required, Validators.maxLength(255)]],
+    Number: ['', [Validators.required, Validators.max(1000), Validators.min(1)]],
+    LineType: ['']
+  });
+
   constructor(private formBuilder: FormBuilder, private lineService: LineService, private stationsService: StationService) { }
 
   ngOnInit() {
@@ -48,6 +56,8 @@ export class LinesComponent implements OnInit {
     };
     this.getAllLines();
   }
+
+  get updateForm() { return this.updateLineForm; }
 
   getAllStations() {
     this.stationsService.getAllStations().subscribe(
@@ -92,6 +102,20 @@ export class LinesComponent implements OnInit {
     this.selectedItems = this.selectedItems.filter(x => {
       return x !== item;
     });
+  }
+
+  onSelectLine(event) {
+    const id = event.target.value;
+    if (id === '-1') {
+      return;
+    }
+    this.selectedLine = this.lineService.getLine(parseInt(id, 10), this.lineList);
+    const names = this.lineService.splitName(this.selectedLine.Name);
+    this.updateForm.setValue({
+      StartLocation: names[0] === undefined ? '' : names[0], EndLocation: names[1] === undefined ? '' : names[1],
+      Number: this.selectedLine.Number, LineType: this.lineService.convertToFrontRideType(this.selectedLine.LineType)
+    });
+    this.showEditor = true;
   }
 
   onSaveLine() {
@@ -145,12 +169,44 @@ export class LinesComponent implements OnInit {
     this.saveLine(line);
   }
 
+  onUpdateLine() {
+    const line = {
+      LineId: this.selectedLine.Id,
+      StartLocation: this.updateLineForm.value.StartLocation,
+      EndLocation: this.updateLineForm.value.EndLocation,
+      LineType: this.lineService.returnValidRideType(this.updateLineForm.value.LineType),
+      Number: this.updateLineForm.value.Number
+    };
+    this.updateLine(line);
+  }
+
   saveLine(line: any) {
     this.lineService.saveLine(line).subscribe(
       data => {
         // line.LineId = data.
         swal.fire({
           title: 'Linija sacuvana!',
+          type: 'success',
+          confirmButtonText: 'Ok'
+        });
+      },
+      err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
+        console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
+      }
+    );
+  }
+
+  updateLine(line: any) {
+    this.lineService.updateLine(line).subscribe(
+      data => {
+        swal.fire({
+          title: 'Linija izmenjena!',
           type: 'success',
           confirmButtonText: 'Ok'
         });

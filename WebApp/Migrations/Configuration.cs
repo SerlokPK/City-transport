@@ -28,7 +28,7 @@ namespace WebApp.Migrations
                 var lineDbModel7 = new LineDbModel() { Name = "CENTAR-TELEP", Number = 12, LineType = LineType.URBAN };
                 var stationDbModel = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Zeleznicka", X = 100.100, Y = 5.5 };
                 var stationDbModel1 = new StationDbModel() { Address = "KisackaAdresa", Name = "Kisacka", X = 200.200, Y = 10.10 };
-                var stationDbModel2 = new StationDbModel() { Address = "CentarAdresa", Name = "Centar", X = 300.300, Y = 15.15 };
+                var stationDbModel2 = new StationDbModel() { Address = "CentarAdresa", Name = "Centar", X = 19.2223949, Y = 15.15 };
 
                 #region StationLineModels
                 Repository<StationLineDbModel, int> repository2 = new Repository<StationLineDbModel, int>(dbContext);
