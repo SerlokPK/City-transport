@@ -23,7 +23,6 @@ namespace WebApp.Controllers
         }
 
         // GET api/values/lines
-
         [HttpGet]
         [Route("Lines")]
         public HttpResponseMessage GetLines(HttpRequestMessage request)
@@ -80,6 +79,7 @@ namespace WebApp.Controllers
             }
         }
 
+        // POST api/values/lines
         [HttpPost]
         [Route("Lines")]
         public HttpResponseMessage PostLine(HttpRequestMessage request, PostLineRequest lineRequest)
@@ -102,9 +102,7 @@ namespace WebApp.Controllers
                     Repository<DepartureDbModel, int> departuresRepository = new Repository<DepartureDbModel, int>(dbContext);
 
                     var lineDbModel = Mapper.Map<LineDbModel>(lineRequest);
-
                     var departures = ResolveDeparturePostRequestToDepartureDbModel(lineRequest.Departures, lineDbModel);
-
                     foreach (var stationId in lineRequest.Stations)
                     {
                         var stationDbModel = stationsRepository.Get(stationId);
@@ -116,6 +114,35 @@ namespace WebApp.Controllers
                     }
 
                     departuresRepository.AddRange(departures);
+                    dbContext.SaveChanges();
+
+                    var lineId = linesRepository.Find(line => line.Number == lineDbModel.Number).First().Id;
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, lineId);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // PUT api/values/lines
+        [HttpPut]
+        [Route("Lines")]
+        public HttpResponseMessage PutLine(HttpRequestMessage request, LineDbModel lineRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
+                    linesRepository.Update(lineRequest);
+
                     dbContext.SaveChanges();
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, lineRequest);
                 }
@@ -129,7 +156,7 @@ namespace WebApp.Controllers
         // GET api/values/stations
         [HttpGet]
         [Route("Stations")]
-        public HttpResponseMessage GetStations(HttpRequestMessage request, [FromUri]GetStationsRequest stationsRequest)
+        public HttpResponseMessage GetStations(HttpRequestMessage request)
         {
             try
             {
@@ -172,6 +199,75 @@ namespace WebApp.Controllers
                     var stations = Mapper.Map<List<Station>>(stationDbModels);
 
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // POST api/values/stations
+        [HttpPost]
+        [Route("Stations")]
+        public HttpResponseMessage PostStation(HttpRequestMessage request, PostStationRequest postStationRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<StationDbModel, int> stationsRepository = new Repository<StationDbModel, int>(dbContext);
+                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
+                    Repository<StationLineDbModel, int> stationLineRepository = new Repository<StationLineDbModel, int>(dbContext);
+                    Repository<DepartureDbModel, int> departuresRepository = new Repository<DepartureDbModel, int>(dbContext);
+
+                    var stationDbModel = Mapper.Map<StationDbModel>(postStationRequest);
+
+                    foreach (var lineId in postStationRequest.LineIds)
+                    {
+                        var lineDbModel = linesRepository.Get(lineId);
+                        stationLineRepository.Add(new StationLineDbModel()
+                        {
+                            Line = lineDbModel,
+                            Station = stationDbModel
+                        });
+                    }
+
+                    dbContext.SaveChanges();
+                    var stationid = stationsRepository.Find(station => station.Address == postStationRequest.Address).First().Id;
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stationid);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+            }
+        }
+
+        // POST api/values/stations
+        [HttpPut]
+        [Route("Stations")]
+        public HttpResponseMessage PutStation(HttpRequestMessage request, StationDbModel stationDbModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                }
+
+                using (var dbContext = new ApplicationDbContext())
+                {
+                    Repository<StationDbModel, int> stationRepository = new Repository<StationDbModel, int>(dbContext);
+                    stationRepository.Update(stationDbModel);
+
+                    dbContext.SaveChanges();
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stationDbModel);
                 }
             }
             catch (Exception e)
