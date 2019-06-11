@@ -26,7 +26,7 @@ export class StationsComponent implements OnInit {
     Address: ['', [Validators.required, Validators.maxLength(255)]],
     X: ['', [Validators.required, Validators.max(85), Validators.min(-85)]],
     Y: ['', [Validators.required, Validators.max(180), Validators.min(-180)]],
-    Lines: [''],
+    Lines: ['', Validators.required],
   });
 
   updateStationForm = this.formBuilder.group({
@@ -90,19 +90,22 @@ export class StationsComponent implements OnInit {
   onSaveStation() {
     const lineId = this.selectedItems.map(x => x.Id);
     const station = {
-      StationId: 0,
+      Id: 0,
       Name: this.addStationForm.value.Name,
       Address: this.addStationForm.value.Address,
       X: this.addStationForm.value.X,
       Y: this.addStationForm.value.Y,
-      Lines: lineId
+      LineIds: lineId
     };
+    this.saveStation(station);
   }
 
   saveStation(station: any) {
     this.stationService.saveStation(station).subscribe(
       data => {
-        // stations.StationId = data.
+        station.Id = data;
+        this.addStationForm.reset();
+        this.stationList.push(station);
         swal.fire({
           title: 'Stanica sacuvana!',
           type: 'success',
@@ -123,12 +126,16 @@ export class StationsComponent implements OnInit {
 
   onUpdateStation() {
     const station = {
-      LineId: this.selectedStation.Id,
-      StartLocation: this.updateStationForm.value.StartLocation,
-      EndLocation: this.updateStationForm.value.EndLocation,
-      LineType: this.updateStationForm.value.LineType,
-      Number: this.updateStationForm.value.Number
+      Id: this.selectedStation.Id,
+      Name: this.updateStationForm.value.Name,
+      Address: this.updateStationForm.value.Address,
+      X: this.updateStationForm.value.X,
+      Y: this.updateStationForm.value.Y,
     };
+    this.selectedStation.Name = this.updateStationForm.value.Name;
+    this.selectedStation.Address = this.updateStationForm.value.Address;
+    this.selectedStation.X = this.updateStationForm.value.X;
+    this.selectedStation.Y = this.updateStationForm.value.Y;
     this.updateStation(station);
   }
 
@@ -156,6 +163,7 @@ export class StationsComponent implements OnInit {
   onSelectStation(event) {
     const id = event.target.value;
     if (id === '-1') {
+      this.showEditor = false;
       return;
     }
     this.selectedStation = this.stationService.getStationById(parseInt(id, 10), this.stationList);

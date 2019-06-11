@@ -107,6 +107,7 @@ export class LinesComponent implements OnInit {
   onSelectLine(event) {
     const id = event.target.value;
     if (id === '-1') {
+      this.showEditor = false;
       return;
     }
     this.selectedLine = this.lineService.getLine(parseInt(id, 10), this.lineList);
@@ -127,7 +128,7 @@ export class LinesComponent implements OnInit {
     const sundayDepB = this.lineService.filterDepartures(this.addLineForm.value.SunLineB);
     const stationIds = this.selectedItems.map(x => x.Id);
     const line = {
-      LineId: 0,
+      Id: 0,
       StartLocation: this.addLineForm.value.StartLocation,
       EndLocation: this.addLineForm.value.EndLocation,
       LineType: this.lineService.returnValidRideType(this.addLineForm.value.LineType),
@@ -171,19 +172,26 @@ export class LinesComponent implements OnInit {
 
   onUpdateLine() {
     const line = {
-      LineId: this.selectedLine.Id,
+      Id: this.selectedLine.Id,
       StartLocation: this.updateLineForm.value.StartLocation,
       EndLocation: this.updateLineForm.value.EndLocation,
       LineType: this.lineService.returnValidRideType(this.updateLineForm.value.LineType),
       Number: this.updateLineForm.value.Number
     };
+    this.selectedLine.Name = `${this.updateLineForm.value.StartLocation}-${this.updateLineForm.value.EndLocation}`;
+    this.selectedLine.LineType = this.lineService.returnValidRideType(this.updateLineForm.value.LineType);
+    this.selectedLine.Number = this.updateLineForm.value.Number;
     this.updateLine(line);
   }
 
   saveLine(line: any) {
     this.lineService.saveLine(line).subscribe(
       data => {
-        // line.LineId = data.
+        line.Id = data;
+        this.addLineForm.reset();
+        // tslint:disable-next-line: max-line-length
+        const newLine = new Line({ Id: line.Id, Name: `${line.StartLocation}-${line.EndLocation}`, Number: line.Number, LineType: line.LineType, DepartureTime: [] });
+        this.lineList.push(newLine);
         swal.fire({
           title: 'Linija sacuvana!',
           type: 'success',

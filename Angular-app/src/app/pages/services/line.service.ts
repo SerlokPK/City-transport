@@ -30,7 +30,7 @@ export class LineService {
   }
 
   getSchedules(lineNumber: string, dayType: string) {
-    const url = `${baseUrl}values/schedules`;
+    const url = `${baseUrl}values/schedules/${lineNumber}/${dayType}`;
     const parameters = {
       LineNumber: lineNumber,
       DayType: dayType

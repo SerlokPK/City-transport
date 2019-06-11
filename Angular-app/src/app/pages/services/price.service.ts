@@ -14,7 +14,7 @@ export class PriceService {
   constructor(private http: HttpClient) { }
 
   getPrices(types: any): Observable<Price> {
-    const url = `${baseUrl}values/price`;
+    const url = `${baseUrl}values/price/${types.passengerType}/${types.ticketType}`;
     const parameters = {
       PassengerType: types.passengerType,
       TicketType: types.ticketType
