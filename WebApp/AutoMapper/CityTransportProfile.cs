@@ -34,6 +34,8 @@ namespace WebApp.AutoMapper
                 .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.StartLocation + "-" + src.EndLocation));
 
             CreateMap<PostStationRequest, StationDbModel>();
+
+            CreateMap<PostPriceRequest, PriceDbModel>();
             #endregion
         }
     }

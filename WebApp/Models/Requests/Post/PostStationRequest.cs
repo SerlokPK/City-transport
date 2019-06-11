@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FluentValidation.Attributes;
+using System.Collections.Generic;
+using WebApp.Validatiors.Post;
 
 namespace WebApp.Models.Requests.Post
 {
+    [Validator(typeof(PostStationRequestValidator))]
     public class PostStationRequest
     {
         public string Name { get; set; }

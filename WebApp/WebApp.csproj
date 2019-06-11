@@ -312,6 +312,7 @@
     <Compile Include="Models\Requests\Get\GetVehiclesRequest.cs" />
     <Compile Include="Models\Requests\Post\PostDepartureRequest.cs" />
     <Compile Include="Models\Requests\Post\PostLineRequest.cs" />
+    <Compile Include="Models\Requests\Post\PostPriceRequest.cs" />
     <Compile Include="Models\Requests\Post\PostStationRequest.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -339,6 +340,8 @@
     <Compile Include="Validatiors\Get\GetVehiclesRequestValidator.cs" />
     <Compile Include="Validatiors\Post\PostDepartureRequestValidator.cs" />
     <Compile Include="Validatiors\Post\PostLineRequestValidator.cs" />
+    <Compile Include="Validatiors\Post\PostPriceRequestValidator.cs" />
+    <Compile Include="Validatiors\Post\PostStationRequestValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

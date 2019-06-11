@@ -22,17 +22,17 @@ namespace WebApp.Migrations
         {
             using (var dbContext = new ApplicationDbContext())
             {
-                var lineDbModel = new LineDbModel() { Name = "Sangaj", Number = 21, LineType = LineType.SUBURBAN };
-                var lineDbModel1 = new LineDbModel() { Name = "Kac", Number = 22, LineType = LineType.SUBURBAN };
-                var lineDbModel2 = new LineDbModel() { Name = "Budisava", Number = 23, LineType = LineType.SUBURBAN };
-                var lineDbModel3 = new LineDbModel() { Name = "Kovilj", Number = 24, LineType = LineType.SUBURBAN };
+                var lineDbModel = new LineDbModel() { Name = "Sangaj-Z. Stanica", Number = 21, LineType = LineType.SUBURBAN };
+                var lineDbModel1 = new LineDbModel() { Name = "Kac-Z. Stanica", Number = 22, LineType = LineType.SUBURBAN };
+                var lineDbModel2 = new LineDbModel() { Name = "Budisava-Z. Stanica", Number = 23, LineType = LineType.SUBURBAN };
+                var lineDbModel3 = new LineDbModel() { Name = "Kovilj-Z. Stanica", Number = 24, LineType = LineType.SUBURBAN };
                 var lineDbModel4 = new LineDbModel() { Name = "LIMAN-STRAND", Number = 1, LineType = LineType.URBAN };
                 var lineDbModel5 = new LineDbModel() { Name = "NASELJE-LIMAN", Number = 7, LineType = LineType.URBAN };
                 var lineDbModel6 = new LineDbModel() { Name = "NASELJE-STRAND", Number = 8, LineType = LineType.URBAN };
                 var lineDbModel7 = new LineDbModel() { Name = "CENTAR-TELEP", Number = 12, LineType = LineType.URBAN };
-                var stationDbModel = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Zeleznicka", X = 100.100, Y = 5.5 };
-                var stationDbModel1 = new StationDbModel() { Address = "KisackaAdresa", Name = "Kisacka", X = 200.200, Y = 10.10 };
-                var stationDbModel2 = new StationDbModel() { Address = "CentarAdresa", Name = "Centar", X = 19.2223949, Y = 15.15 };
+                var stationDbModel = new StationDbModel() { Address = "ZeleznickaAdresa", Name = "Zeleznicka", X = 45.264748, Y = 19.829873 };
+                var stationDbModel1 = new StationDbModel() { Address = "KisackaAdresa", Name = "Kisacka", X = 45.260885, Y = 19.841863 };
+                var stationDbModel2 = new StationDbModel() { Address = "CentarAdresa", Name = "Centar", X = 45.254836, Y = 19.841820 };
 
                 #region StationLineModels
                 Repository<StationLineDbModel, int> repository2 = new Repository<StationLineDbModel, int>(dbContext);
