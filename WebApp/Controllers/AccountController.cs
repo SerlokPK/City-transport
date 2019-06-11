@@ -329,15 +329,18 @@ namespace WebApp.Controllers
 
             var user = new ApplicationUser()
             {
+                Id = model.Email,
                 UserName = model.Email,
                 Email = model.Email,
                 Address = model.Address,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                DayOfBirth = model.DayOfBirth
+                DayOfBirth = model.DayOfBirth,
+                PasswordHash = ApplicationUser.HashPassword(model.Password)
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            UserManager.AddToRole(user.Id, "Admin");
 
             if (!result.Succeeded)
             {
