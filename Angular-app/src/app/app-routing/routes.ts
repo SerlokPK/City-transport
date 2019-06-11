@@ -7,6 +7,7 @@ import { PriceListComponent } from '../pages/price-list/price-list.component';
 import { RegisterComponent } from '../pages/register/register.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { LinesComponent } from '../admin/lines/lines.component';
+import { StationsComponent } from '../admin/stations/stations.component';
 
 export const routes: Routes = [
     { path: 'rides', component: RidesComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'admin/lines', component: LinesComponent },
+    { path: 'admin/stations', component: StationsComponent },
     { path: '', redirectTo: '/rides', pathMatch: 'full' },
 ];

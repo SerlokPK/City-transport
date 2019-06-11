@@ -50,3 +50,51 @@
   <input type="text" formControlName='SunLineB' class="form-control mb-4" placeholder="Polasci za smer B">
   <button class="btn btn-info btn-block my-4" [disabled]='!addLineForm.valid' type="submit">Sacuvaj</button>
 </form>
+<form [formGroup]='updateLineForm' (ngSubmit)='onUpdateLine()' class="text-center border border-light">
+  <p class="h4 mb-4">Izmeni liniju</p>
+  Linije: <select class="browser-default custom-select" (change)='onSelectLine($event)'>
+    <option value='-1'>Izaberi</option>
+    <option *ngFor='let line of lineList' [value]='line.Id'>
+      {{line.Name}}
+    </option>
+  </select>
+  <div *ngIf='showEditor'>
+    <input type="text" formControlName='StartLocation' class="form-control mb-4" placeholder="Pocetna lokacija">
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('StartLocation').touched && updateLineForm.get('StartLocation').hasError('required')">
+      Pocetna lokacija je obavezna!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('StartLocation').touched && !updateLineForm.get('StartLocation').hasError('required') && updateLineForm.get('StartLocation').hasError('maxlength')">
+      Max length is 100!
+    </span>
+    <input type="text" formControlName='EndLocation' class="form-control mb-4" placeholder="Krajnja lokacija">
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('EndLocation').touched && updateLineForm.get('EndLocation').hasError('required')">
+      Krajnja lokacija je obavezna!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('EndLocation').touched && !updateLineForm.get('EndLocation').hasError('required') && updateLineForm.get('EndLocation').hasError('maxlength')">
+      Max length is 100!
+    </span>
+    <input type="number" formControlName='Number' class="form-control mb-4" placeholder="Broj linije">
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('Number').touched && updateLineForm.get('Number').hasError('required')">
+      Broj linije je obavezan!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('Number').touched && !updateLineForm.get('Number').hasError('required') && updateLineForm.get('Number').hasError('max')">
+      Max number is 1000!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateLineForm.get('Number').touched && !updateLineForm.get('Number').hasError('required') && updateLineForm.get('Number').hasError('min')">
+      Min number is 1!
+    </span>
+    Red voznje: <select formControlName='LineType' class="browser-default custom-select">
+      <option *ngFor='let ride of rideTypes'>
+        {{ride}}
+      </option>
+    </select>
+  </div>
+  <button class="btn btn-info btn-block my-4" [disabled]='!updateLineForm.valid' type="submit">Izmeni</button>
+</form>

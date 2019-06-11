@@ -24,6 +24,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { LinesComponent } from './admin/lines/lines.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RegisterComponent } from './pages/register/register.component';
+import { StationsComponent } from './admin/stations/stations.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { RegisterComponent } from './pages/register/register.component';
     RegisterComponent,
     LoginComponent,
     LinesComponent,
+    StationsComponent,
   ],
   imports: [
     BrowserModule,

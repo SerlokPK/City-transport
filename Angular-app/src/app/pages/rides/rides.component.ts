@@ -74,11 +74,7 @@ export class RidesComponent implements OnInit {
   }
 
   convertLineName(lineName: string) {
-    const newName = lineName.split('-');
-    if (!newName[1]) {
-      return newName[0];
-    }
-    return `${newName[1]}-${newName[0]}`;
+    return this.lineService.convertLineNames(lineName);
   }
 
   selectDay(event) {

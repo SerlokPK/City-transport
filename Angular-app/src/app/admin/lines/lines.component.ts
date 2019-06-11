@@ -16,10 +16,11 @@ export class LinesComponent implements OnInit {
   rideTypes: string[] = ['Gradski', 'Prigradski'];
   lineList: Line[] = [];
   stationList: Station[] = [];
-  rideType = 'URBAN';
-  dropdownList = []; // Station[] = [];
-  selectedItems = []; // Station[] = [];
+  selectedLine: Line;
+  dropdownList = [];
+  selectedItems = [];
   dropdownSettings = {};
+  showEditor = false;
 
   addLineForm = this.formBuilder.group({
     StartLocation: ['', [Validators.required, Validators.maxLength(255)]],
@@ -35,6 +36,13 @@ export class LinesComponent implements OnInit {
     SunLineB: [''],
   });
 
+  updateLineForm = this.formBuilder.group({
+    StartLocation: ['', [Validators.required, Validators.maxLength(255)]],
+    EndLocation: ['', [Validators.required, Validators.maxLength(255)]],
+    Number: ['', [Validators.required, Validators.max(1000), Validators.min(1)]],
+    LineType: ['']
+  });
+
   constructor(private formBuilder: FormBuilder, private lineService: LineService, private stationsService: StationService) { }
 
   ngOnInit() {
@@ -48,6 +56,8 @@ export class LinesComponent implements OnInit {
     };
     this.getAllLines();
   }
+
+  get updateForm() { return this.updateLineForm; }
 
   getAllStations() {
     this.stationsService.getAllStations().subscribe(
@@ -94,6 +104,21 @@ export class LinesComponent implements OnInit {
     });
   }
 
+  onSelectLine(event) {
+    const id = event.target.value;
+    if (id === '-1') {
+      this.showEditor = false;
+      return;
+    }
+    this.selectedLine = this.lineService.getLine(parseInt(id, 10), this.lineList);
+    const names = this.lineService.splitName(this.selectedLine.Name);
+    this.updateForm.setValue({
+      StartLocation: names[0] === undefined ? '' : names[0], EndLocation: names[1] === undefined ? '' : names[1],
+      Number: this.selectedLine.Number, LineType: this.lineService.convertToFrontRideType(this.selectedLine.LineType)
+    });
+    this.showEditor = true;
+  }
+
   onSaveLine() {
     const workdayDepA = this.lineService.filterDepartures(this.addLineForm.value.WorkLineA);
     const workdayDepB = this.lineService.filterDepartures(this.addLineForm.value.WorkLineB);
@@ -103,7 +128,7 @@ export class LinesComponent implements OnInit {
     const sundayDepB = this.lineService.filterDepartures(this.addLineForm.value.SunLineB);
     const stationIds = this.selectedItems.map(x => x.Id);
     const line = {
-      LineId: 0,
+      Id: 0,
       StartLocation: this.addLineForm.value.StartLocation,
       EndLocation: this.addLineForm.value.EndLocation,
       LineType: this.lineService.returnValidRideType(this.addLineForm.value.LineType),
@@ -145,12 +170,51 @@ export class LinesComponent implements OnInit {
     this.saveLine(line);
   }
 
+  onUpdateLine() {
+    const line = {
+      Id: this.selectedLine.Id,
+      StartLocation: this.updateLineForm.value.StartLocation,
+      EndLocation: this.updateLineForm.value.EndLocation,
+      LineType: this.lineService.returnValidRideType(this.updateLineForm.value.LineType),
+      Number: this.updateLineForm.value.Number
+    };
+    this.selectedLine.Name = `${this.updateLineForm.value.StartLocation}-${this.updateLineForm.value.EndLocation}`;
+    this.selectedLine.LineType = this.lineService.returnValidRideType(this.updateLineForm.value.LineType);
+    this.selectedLine.Number = this.updateLineForm.value.Number;
+    this.updateLine(line);
+  }
+
   saveLine(line: any) {
     this.lineService.saveLine(line).subscribe(
       data => {
-        // line.LineId = data.
+        line.Id = data;
+        this.addLineForm.reset();
+        // tslint:disable-next-line: max-line-length
+        const newLine = new Line({ Id: line.Id, Name: `${line.StartLocation}-${line.EndLocation}`, Number: line.Number, LineType: line.LineType, DepartureTime: [] });
+        this.lineList.push(newLine);
         swal.fire({
           title: 'Linija sacuvana!',
+          type: 'success',
+          confirmButtonText: 'Ok'
+        });
+      },
+      err => {
+        swal.fire({
+          title: 'Greska!',
+          text: `${err.message}`,
+          type: 'error',
+          confirmButtonText: 'Ok'
+        });
+        console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
+      }
+    );
+  }
+
+  updateLine(line: any) {
+    this.lineService.updateLine(line).subscribe(
+      data => {
+        swal.fire({
+          title: 'Linija izmenjena!',
           type: 'success',
           confirmButtonText: 'Ok'
         });

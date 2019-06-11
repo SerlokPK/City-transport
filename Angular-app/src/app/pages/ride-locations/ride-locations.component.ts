@@ -54,7 +54,7 @@ export class RideLocationsComponent implements OnInit {
           type: 'error',
           confirmButtonText: 'Ok'
         });
-        console.log('Error while retrieving all lines from server. Reason: ', err.statusText);
+        console.log('Error while retrieving all vehicles from server. Reason: ', err.statusText);
       }
     );
   }
@@ -81,7 +81,13 @@ export class RideLocationsComponent implements OnInit {
   }
 
   markerHandler(vehicle: Vehicle) {
-    alert('Marker\'s Title: '); // ZAMENI S SWALOM
+    swal.fire({
+      title: `Trenutna lokacija`,
+      html: `Latitude: ${vehicle.X}</br>
+            Longitude: ${vehicle.Y}`,
+      type: 'info',
+      confirmButtonText: 'Ok'
+    });
   }
 
   gmapInit() {

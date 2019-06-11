@@ -22,4 +22,18 @@ export class StationService {
     const url = `${baseUrl}values/Stations`;
     return this.http.get<Station[]>(url);
   }
+
+  getStationById(id: number, stationList: Station[]): Station {
+    return stationList.find(x => x.Id === id);
+  }
+
+  saveStation(station: any) {
+    const url = `${baseUrl}values/Stations`;
+    return this.http.post<any>(url, station);
+  }
+
+  updateStation(station: any) {
+    const url = `${baseUrl}values/Stations`;
+    return this.http.put<any>(url, station);
+  }
 }

@@ -30,7 +30,7 @@ export class LineService {
   }
 
   getSchedules(lineNumber: string, dayType: string) {
-    const url = `${baseUrl}values/schedules`;
+    const url = `${baseUrl}values/schedules/${lineNumber}/${dayType}`;
     const parameters = {
       LineNumber: lineNumber,
       DayType: dayType
@@ -41,6 +41,11 @@ export class LineService {
   saveLine(line: any) {
     const url = `${baseUrl}values/Lines`;
     return this.http.post<any>(url, line);
+  }
+
+  updateLine(line: any) {
+    const url = `${baseUrl}values/Lines`;
+    return this.http.put<any>(url, line);
   }
 
   filterDepartures(departures: string) {
@@ -67,5 +72,25 @@ export class LineService {
     } else {
       return 'SUBURBAN';
     }
+  }
+
+  convertToFrontRideType(type: string) {
+    if (type === 'URBAN') {
+      return 'Gradski';
+    } else {
+      return 'Prigradski';
+    }
+  }
+
+  convertLineNames(lineName: string) {
+    const newName = this.splitName(lineName);
+    if (!newName[1]) {
+      return newName[0];
+    }
+    return `${newName[1]}-${newName[0]}`;
+  }
+
+  splitName(name: string) {
+    return name.split('-');
   }
 }

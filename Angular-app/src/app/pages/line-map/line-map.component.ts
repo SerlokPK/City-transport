@@ -83,8 +83,13 @@ export class LineMapComponent implements OnInit {
   }
 
   markerHandler(station: Station) {
-    alert('Marker\'s Title: ' + station.Address);
-    // DODAJ SWAL AKO STIGNES
+    swal.fire({
+      title: `${station.Name}`,
+      html: `Adresa: ${station.Address}</br>
+            Stanice: ${station.Lines.map(x => `${x.Number}`)}`,
+      type: 'info',
+      confirmButtonText: 'Ok'
+    });
   }
 
   gmapInit() {
