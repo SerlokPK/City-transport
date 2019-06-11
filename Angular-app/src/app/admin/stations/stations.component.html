@@ -1,0 +1,107 @@
+<form [formGroup]='addStationForm' (ngSubmit)='onSaveStation()' class="text-center border border-light">
+  <p class="h4 mb-4">Dodaj stanicu</p>
+  <input type="text" formControlName='Name' class="form-control mb-4" placeholder="Naziv">
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Name').touched && addStationForm.get('Name').hasError('required')">
+    Naziv je obavezan!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Name').touched && !addStationForm.get('Name').hasError('required') && addStationForm.get('Name').hasError('maxlength')">
+    Max duzina je 255!
+  </span>
+  <input type="text" formControlName='Address' class="form-control mb-4" placeholder="Adresa">
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Address').touched && addStationForm.get('Address').hasError('required')">
+    Adresa je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Address').touched && !addStationForm.get('Address').hasError('required') && addStationForm.get('Address').hasError('maxlength')">
+    Max duzina je 255!
+  </span>
+  <input type="number" formControlName='X' step="0.00000001" class="form-control mb-4" placeholder="Latitude">
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('X').touched && addStationForm.get('X').hasError('required')">
+    Latitude je obavezan!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('X').touched && !addStationForm.get('X').hasError('required') && addStationForm.get('X').hasError('max')">
+    Max duzina je 85!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('X').touched && !addStationForm.get('X').hasError('required') && addStationForm.get('X').hasError('min')">
+    Min duzina je -85!
+  </span>
+  <input type="number" formControlName='Y' step="0.00000001" class="form-control mb-4" placeholder="Longitude">
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Y').touched && addStationForm.get('Y').hasError('required')">
+    Longitude je obavezan!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Y').touched && !addStationForm.get('Y').hasError('required') && addStationForm.get('Y').hasError('max')">
+    Max duzina je 180!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addStationForm.get('Y').touched && !addStationForm.get('Y').hasError('required') && addStationForm.get('Y').hasError('min')">
+    Min duzina je -180!
+  </span>
+  Stanice: <ng-multiselect-dropdown [placeholder]="'Linije'" [data]="dropdownList" formControlName="Lines"
+    [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
+  </ng-multiselect-dropdown>
+  <button class="btn btn-info btn-block my-4" [disabled]='!addStationForm.valid' type="submit">Sacuvaj</button>
+</form>
+<form [formGroup]='updateStationForm' (ngSubmit)='onUpdateStation()' class="text-center border border-light">
+  <p class="h4 mb-4">Izmeni stanicu</p>
+  Stanice: <select class="browser-default custom-select" (change)='onSelectStation($event)'>
+    <option value='-1'>Izaberi</option>
+    <option *ngFor='let station of stationList' [value]='station.Id'>
+      {{station.Name}}
+    </option>
+  </select>
+  <div *ngIf='showEditor'>
+    <input type="text" formControlName='Name' class="form-control mb-4" placeholder="Naziv">
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Name').touched && updateStationForm.get('Name').hasError('required')">
+      Naziv je obavezan!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Name').touched && !updateStationForm.get('Name').hasError('required') && updateStationForm.get('Name').hasError('maxlength')">
+      Max duzina je 255!
+    </span>
+    <input type="text" formControlName='Address' class="form-control mb-4" placeholder="Adresa">
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Address').touched && updateStationForm.get('Address').hasError('required')">
+      Adresa je obavezna!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Address').touched && !updateStationForm.get('Address').hasError('required') && updateStationForm.get('Address').hasError('maxlength')">
+      Max duzina je 255!
+    </span>
+    <input type="number" formControlName='X' step="0.00000001" class="form-control mb-4" placeholder="Latitude">
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('X').touched && updateStationForm.get('X').hasError('required')">
+      Latitude je obavezan!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('X').touched && !updateStationForm.get('X').hasError('required') && updateStationForm.get('X').hasError('max')">
+      Max duzina je 85!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('X').touched && !updateStationForm.get('X').hasError('required') && updateStationForm.get('X').hasError('min')">
+      Min duzina je -85!
+    </span>
+    <input type="number" formControlName='Y' step="0.00000001" class="form-control mb-4" placeholder="Longitude">
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Y').touched && updateStationForm.get('Y').hasError('required')">
+      Longitude je obavezan!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Y').touched && !updateStationForm.get('Y').hasError('required') && updateStationForm.get('Y').hasError('max')">
+      Max duzina je 180!
+    </span>
+    <span class='form-group hasError'
+      *ngIf="updateStationForm.get('Y').touched && !updateStationForm.get('Y').hasError('required') && updateStationForm.get('Y').hasError('min')">
+      Min duzina je -180!
+    </span>
+  </div>
+  <button class="btn btn-info btn-block my-4" [disabled]='!updateStationForm.valid' type="submit">Izmeni</button>
+</form>

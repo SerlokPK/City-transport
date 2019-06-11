@@ -17,8 +17,8 @@ export class LinesComponent implements OnInit {
   lineList: Line[] = [];
   stationList: Station[] = [];
   selectedLine: Line;
-  dropdownList = []; // Station[] = [];
-  selectedItems = []; // Station[] = [];
+  dropdownList = [];
+  selectedItems = [];
   dropdownSettings = {};
   showEditor = false;
 
