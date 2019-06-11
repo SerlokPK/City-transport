@@ -278,8 +278,8 @@ namespace WebApp.Controllers
 
         // GET api/values/schedules
         [HttpGet]
-        [Route("Schedules")]
-        public HttpResponseMessage GetSchedules(HttpRequestMessage request, [FromUri]GetSchedulesRequest schedulesRequest)
+        [Route("Schedules/{lineNumber}/{dayType}")]
+        public HttpResponseMessage GetSpecificSchedules(HttpRequestMessage request, [FromUri]GetSchedulesRequest schedulesRequest)
         {
             try
             {
@@ -315,8 +315,8 @@ namespace WebApp.Controllers
 
         // GET api/values/vehicles
         [HttpGet]
-        [Route("Vehicles")]
-        public HttpResponseMessage GeVehicles(HttpRequestMessage request, [FromUri]GetVehiclesRequest schedulesRequest)
+        [Route("Vehicles/{LineNumber}")]
+        public HttpResponseMessage GeSpecificVehicles(HttpRequestMessage request, [FromUri]GetVehiclesRequest schedulesRequest)
         {
             try
             {
@@ -342,8 +342,8 @@ namespace WebApp.Controllers
 
         // GET api/values/price
         [HttpGet]
-        [Route("price")]
-        public HttpResponseMessage GetPrice(HttpRequestMessage request, [FromUri]GetPriceRequest schedulesRequest)
+        [Route("Price/{PassengerType}/{TicketType}")]
+        public HttpResponseMessage GetSpecificPrice(HttpRequestMessage request, [FromUri]GetPriceRequest schedulesRequest)
         {
             try
             {
