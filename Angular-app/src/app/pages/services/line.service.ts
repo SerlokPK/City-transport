@@ -38,6 +38,19 @@ export class LineService {
     return this.http.get<Schedule>(url, { params: parameters });
   }
 
+  saveLine(line: any) {
+    const url = `${baseUrl}values/Lines`;
+    return this.http.post<any>(url, line);
+  }
+
+  filterDepartures(departures: string) {
+    const departureArray = departures.split(' ');
+    const regexExp = new RegExp('^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])(:[0-5][0-9])?$');
+    return departureArray.filter(x => {
+      return regexExp.test(x);
+    });
+  }
+
   returnValidDayType(type: string) {
     if (type === 'Radni dan') {
       return 'WORKDAY';

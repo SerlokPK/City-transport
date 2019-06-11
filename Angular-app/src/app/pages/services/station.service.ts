@@ -13,8 +13,13 @@ export class StationService {
   constructor(private http: HttpClient) { }
 
   getStationsByLineNumber(lineNumber: string): Observable<Station[]> {
-    const url = `${baseUrl}values/Stations`;
+    const url = `${baseUrl}values/Stations/${lineNumber}`;
     const parameters = { LineNumber: lineNumber };
     return this.http.get<Station[]>(url, { params: parameters });
+  }
+
+  getAllStations() {
+    const url = `${baseUrl}values/Stations`;
+    return this.http.get<Station[]>(url);
   }
 }
