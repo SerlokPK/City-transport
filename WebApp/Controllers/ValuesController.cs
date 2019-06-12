@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApp.Models;
 using WebApp.Models.Requests.Get;
 using WebApp.Models.Requests.Post;
@@ -14,7 +15,6 @@ using static WebApp.AutoMapper.AutoMapperResolver;
 
 namespace WebApp.Controllers
 {
-    //[Authorize]
     [RoutePrefix("api/Values")]
     public class ValuesController : ApiController
     {
@@ -81,6 +81,7 @@ namespace WebApp.Controllers
 
         // POST api/values/lines
         [HttpPost]
+        [Authorize]
         [Route("Lines")]
         public HttpResponseMessage PostLine(HttpRequestMessage request, PostLineRequest lineRequest)
         {
@@ -128,6 +129,7 @@ namespace WebApp.Controllers
 
         // PUT api/values/lines
         [HttpPut]
+        [Authorize]
         [Route("Lines")]
         public HttpResponseMessage PutLine(HttpRequestMessage request, LineDbModel lineRequest)
         {
@@ -209,6 +211,7 @@ namespace WebApp.Controllers
 
         // POST api/values/stations
         [HttpPost]
+        [Authorize]
         [Route("Stations")]
         public HttpResponseMessage PostStation(HttpRequestMessage request, PostStationRequest postStationRequest)
         {
@@ -251,6 +254,7 @@ namespace WebApp.Controllers
 
         // POST api/values/stations
         [HttpPut]
+        [Authorize]
         [Route("Stations")]
         public HttpResponseMessage PutStation(HttpRequestMessage request, StationDbModel stationDbModel)
         {
@@ -370,6 +374,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("Price")]
         public HttpResponseMessage PostPrice(HttpRequestMessage request, PostPriceRequest postPriceRequest)
         {
@@ -398,6 +403,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("Price")]
         public HttpResponseMessage PutPrice(HttpRequestMessage request, PriceDbModel priceDbModel)
         {

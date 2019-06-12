@@ -18,8 +18,8 @@ export const routes: Routes = [
     { path: 'priceList', component: PriceListComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'admin/lines', component: LinesComponent },
+    { path: 'admin/lines', component: LinesComponent, canActivate: [AuthGuard] },
     { path: 'admin/stations', component: StationsComponent, canActivate: [AuthGuard] },
-    { path: 'admin/prices', component: PricesComponent },
+    { path: 'admin/prices', component: PricesComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: '/rides', pathMatch: 'full' },
 ];

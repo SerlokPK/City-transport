@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Station } from '../classes/station';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -29,11 +29,17 @@ export class StationService {
 
   saveStation(station: any) {
     const url = `${baseUrl}values/Stations`;
-    return this.http.post<any>(url, station);
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
+    });
+    return this.http.post<any>(url, station, { headers: header });
   }
 
   updateStation(station: any) {
     const url = `${baseUrl}values/Stations`;
-    return this.http.put<any>(url, station);
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
+    });
+    return this.http.put<any>(url, station, { headers: header });
   }
 }

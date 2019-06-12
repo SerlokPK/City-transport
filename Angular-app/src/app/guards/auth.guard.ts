@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (sessionStorage.getItem('jwt') && sessionStorage.getItem('role') === 'admin') {
+    if (sessionStorage.getItem('jwt') && sessionStorage.getItem('role') === 'Admin') {
       return true;
     } else {
       this.router.navigate(['/rides']);

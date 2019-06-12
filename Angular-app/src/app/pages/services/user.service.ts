@@ -25,6 +25,8 @@ export class UserService {
     const header = new HttpHeaders({
       'Content-Type': 'application/json',
     });
+    sessionStorage.removeItem('jwt');
+    sessionStorage.removeItem('role');
     return this.http.post<any>(url, {}, { headers: header });
   }
 
@@ -53,10 +55,11 @@ export class UserService {
         const decodedJwtData = JSON.parse(decodedJwtJsonData);
         const role = decodedJwtData.role;
 
-        localStorage.setItem('jwt', jwt);
-        localStorage.setItem('role', role);
+        sessionStorage.setItem('jwt', jwt);
+        sessionStorage.setItem('role', role);
         this.loggedIn.next(true);
-        callback();
+        // callback();
+        location.reload();
       },
         error => {
           swal.fire({
