@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApp.Models;
 using WebApp.Providers;
 using WebApp.Results;
@@ -19,6 +20,7 @@ using WebApp.Results;
 namespace WebApp.Controllers
 {
     [Authorize]
+    [EnableCors(origins: "http://localhost:52295/", headers: "*", methods: "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {

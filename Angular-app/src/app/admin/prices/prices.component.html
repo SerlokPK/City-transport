@@ -1,0 +1,58 @@
+<form [formGroup]='addPriceForm' (ngSubmit)='onSavePrice()' class="text-center border border-light">
+  <p class="h4 mb-4">Dodaj cenu</p>
+  <input type="text" formControlName='PassengerType' class="form-control mb-4" placeholder="Tip putnika">
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('PassengerType').touched && addPriceForm.get('PassengerType').hasError('required')">
+    Tip je obavezan!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('PassengerType').touched && !addPriceForm.get('PassengerType').hasError('required') && addPriceForm.get('PassengerType').hasError('maxlength')">
+    Max duzina je 255!
+  </span>
+  <input type="text" formControlName='TicketType' class="form-control mb-4" placeholder="Tip karte">
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('TicketType').touched && addPriceForm.get('TicketType').hasError('required')">
+    Tip je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('TicketType').touched && !addPriceForm.get('TicketType').hasError('required') && addPriceForm.get('TicketType').hasError('maxlength')">
+    Max duzina je 255!
+  </span>
+  <input type="number" formControlName='Cost' step="0.01" class="form-control mb-4" placeholder="Cena">
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('Cost').touched && addPriceForm.get('Cost').hasError('required')">
+    Cena je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('Cost').touched && !addPriceForm.get('Cost').hasError('required') && addPriceForm.get('Cost').hasError('max')">
+    Max velicina je 1000000!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="addPriceForm.get('Cost').touched && !addPriceForm.get('Cost').hasError('required') && addPriceForm.get('Cost').hasError('min')">
+    Min duzina je 1!
+  </span>
+  <button class="btn btn-info btn-block my-4" [disabled]='!addPriceForm.valid' type="submit">Sacuvaj</button>
+</form>
+<form [formGroup]='updatePriceForm' (ngSubmit)='onUpdatePrice()' class="text-center border border-light">
+  <p class="h4 mb-4">Izmeni cenu</p>
+  <!-- Stanice: <select class="browser-default custom-select" (change)='onSelectStation($event)'>
+    <option value='-1'>Izaberi</option>
+    <option *ngFor='let station of stationList' [value]='station.Id'>
+      {{station.Name}}
+    </option>
+  </select> -->
+  <input type="number" formControlName='Cost' step="0.01" class="form-control mb-4" placeholder="Cena">
+  <span class='form-group hasError'
+    *ngIf="updatePriceForm.get('Cost').touched && updatePriceForm.get('Cost').hasError('required')">
+    Cena je obavezna!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="updatePriceForm.get('Cost').touched && !updatePriceForm.get('Cost').hasError('required') && updatePriceForm.get('Cost').hasError('max')">
+    Max velicina je 1000000!
+  </span>
+  <span class='form-group hasError'
+    *ngIf="updatePriceForm.get('Cost').touched && !updatePriceForm.get('Cost').hasError('required') && updatePriceForm.get('Cost').hasError('min')">
+    Min duzina je 1!
+  </span>
+  <button class="btn btn-info btn-block my-4" [disabled]='!updatePriceForm.valid' type="submit">Izmeni</button>
+</form>

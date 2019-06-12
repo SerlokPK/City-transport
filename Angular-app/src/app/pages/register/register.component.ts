@@ -38,6 +38,15 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
+    if (!new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})').test(this.registerForm.value.Password)) {
+      swal.fire({
+        title: 'Greska!',
+        text: `Sifra mora da sadrzi malo, veliko slovo, broj i specijalni karakter`,
+        type: 'error',
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
     const user = new User(this.registerForm.value);
     this.registerUser(user);
   }

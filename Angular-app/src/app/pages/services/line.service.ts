@@ -40,12 +40,18 @@ export class LineService {
 
   saveLine(line: any) {
     const url = `${baseUrl}values/Lines`;
-    return this.http.post<any>(url, line);
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
+    });
+    return this.http.post<any>(url, line, { headers: header });
   }
 
   updateLine(line: any) {
     const url = `${baseUrl}values/Lines`;
-    return this.http.put<any>(url, line);
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
+    });
+    return this.http.put<any>(url, line, { headers: header });
   }
 
   filterDepartures(departures: string) {

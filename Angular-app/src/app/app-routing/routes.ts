@@ -8,6 +8,8 @@ import { RegisterComponent } from '../pages/register/register.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { LinesComponent } from '../admin/lines/lines.component';
 import { StationsComponent } from '../admin/stations/stations.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { PricesComponent } from '../admin/prices/prices.component';
 
 export const routes: Routes = [
     { path: 'rides', component: RidesComponent },
@@ -16,7 +18,8 @@ export const routes: Routes = [
     { path: 'priceList', component: PriceListComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'admin/lines', component: LinesComponent },
-    { path: 'admin/stations', component: StationsComponent },
+    { path: 'admin/lines', component: LinesComponent, canActivate: [AuthGuard] },
+    { path: 'admin/stations', component: StationsComponent, canActivate: [AuthGuard] },
+    { path: 'admin/prices', component: PricesComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: '/rides', pathMatch: 'full' },
 ];
