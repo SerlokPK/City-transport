@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { User } from '../classes/user';
 import swal from 'sweetalert2';
@@ -11,13 +11,27 @@ const baseUrl = 'http://localhost:52295/';
   providedIn: 'root'
 })
 export class UserService {
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
 
   constructor(private http: HttpClient) { }
+
+  logOut() {
+    this.loggedIn.next(false);
+    const url = `${baseUrl}account/logout`;
+    const header = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<any>(url, {}, { headers: header });
+  }
 
   registerUser(user: User): Observable<User> {
     const url = `${baseUrl}account/register`;
     const header = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
     return this.http.post<User>(url, user, { headers: header });
   }
@@ -26,7 +40,7 @@ export class UserService {
     const userData = `username=${user.Email}&password=${user.Password}&grant_type=password`;
     const httpOptions = {
       headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
+        'Content-type': 'application/x-www-form-urlencoded',
       }
     };
 
@@ -41,6 +55,7 @@ export class UserService {
 
         localStorage.setItem('jwt', jwt);
         localStorage.setItem('role', role);
+        this.loggedIn.next(true);
         callback();
       },
         error => {

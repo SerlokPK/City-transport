@@ -387,7 +387,8 @@ namespace WebApp.Controllers
                     repository.Add(priceDbModel);
                     dbContext.SaveChanges();
 
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK);
+                    var priceId = repository.Find(price => price.PassengerType == postPriceRequest.PassengerType && price.TicketType == postPriceRequest.TicketType).First().Id;
+                    return request.CreateResponse(System.Net.HttpStatusCode.OK, priceId);
                 }
             }
             catch (Exception e)

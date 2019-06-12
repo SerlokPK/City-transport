@@ -22,6 +22,24 @@ export class PriceService {
     return this.http.get<Price>(url, { params: parameters });
   }
 
+  savePrice(price: any) {
+    const url = `${baseUrl}values/price`;
+    return this.http.post<Price>(url, price);
+  }
+
+  updatePrice(price: any) {
+    const url = `${baseUrl}values/price`;
+    return this.http.put<Price>(url, price);
+  }
+
+  getIdByTypes(types: any, priceList: Price[]) {
+    return priceList.filter(x => {
+      if (types.PassengerType === x.PassengerType && types.TicketType === x.TicketType) {
+        return x.Id;
+      }
+    });
+  }
+
   returnValidCardType(type: string) {
     if (type === 'Vremenska') {
       return 'Time';

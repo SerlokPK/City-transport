@@ -25,6 +25,8 @@ import { LinesComponent } from './admin/lines/lines.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RegisterComponent } from './pages/register/register.component';
 import { StationsComponent } from './admin/stations/stations.component';
+import { AuthGuard } from './guards/auth.guard';
+import { PricesComponent } from './admin/prices/prices.component';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { StationsComponent } from './admin/stations/stations.component';
     LoginComponent,
     LinesComponent,
     StationsComponent,
+    PricesComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { StationsComponent } from './admin/stations/stations.component';
     FormsModule
   ],
   providers: [LineService, StationService, VehicleService, PriceService,
-    UserService],
+    UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
