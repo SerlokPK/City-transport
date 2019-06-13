@@ -210,57 +210,57 @@ namespace WebApp.Migrations
                 #region Vehicles
                 Repository<VehicleDbModel, int> repository3 = new Repository<VehicleDbModel, int>(dbContext);
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 45.264117, Y = 19.830434 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 45.264630, Y = 19.831539 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 45.265415, Y = 19.833524 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.1, Y = 1.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.2, Y = 1.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel, X = 1.3, Y = 1.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 45.263871, Y = 19.830477 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 45.263109, Y = 19.830885 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 45.261560, Y = 19.831726 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.1, Y = 2.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.2, Y = 2.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel1, X = 2.3, Y = 2.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 45.260812, Y = 19.832659 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 45.261824, Y = 19.836285 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 45.262349, Y = 19.838211 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.1, Y = 3.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.2, Y = 3.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel2, X = 3.3, Y = 3.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 45.262300, Y = 19.840244 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 45.261284, Y = 19.841639 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 45.260468, Y = 19.842867 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.1, Y = 4.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.2, Y = 4.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel3, X = 4.3, Y = 4.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 45.259369, Y = 19.842545 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 45.257480, Y = 19.841771 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 45.256001, Y = 19.841639 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.1, Y = 5.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.2, Y = 5.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel4, X = 5.3, Y = 5.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 45.254120, Y = 19.842245 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 45.252893, Y = 19.839343 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 45.251911, Y = 19.837144 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.1, Y = 6.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.2, Y = 6.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel5, X = 6.3, Y = 6.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 45.250752, Y = 19.834832 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 45.249200, Y = 19.829249 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 45.249194, Y = 19.825223 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.1, Y = 7.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.2, Y = 7.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel6, X = 7.3, Y = 7.33 });
 
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 45.258107, Y = 19.818746 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 45.257405, Y = 19.816645 });
-                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 45.256476, Y = 19.813888 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.1, Y = 8.11 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.2, Y = 8.22 });
+                dbContext.SaveChanges(); repository3.Add(new VehicleDbModel() { LineDbModel = lineDbModel7, X = 8.3, Y = 8.33 });
 
                 #endregion
 
                 #region Prices
                 Repository<PriceDbModel, int> repository4 = new Repository<PriceDbModel, int>(dbContext);
-                repository4.Add(new PriceDbModel() { Cost = 51, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Daily });
-                repository4.Add(new PriceDbModel() { Cost = 151, PassengerType = PassengerType.Regular, TicketType = TicketType.Daily });
-                repository4.Add(new PriceDbModel() { Cost = 101, PassengerType = PassengerType.Student, TicketType = TicketType.Daily });
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Daily });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Daily });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Daily });
 
-                repository4.Add(new PriceDbModel() { Cost = 52, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Monthly });
-                repository4.Add(new PriceDbModel() { Cost = 152, PassengerType = PassengerType.Regular, TicketType = TicketType.Monthly });
-                repository4.Add(new PriceDbModel() { Cost = 102, PassengerType = PassengerType.Student, TicketType = TicketType.Monthly });
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Monthly });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Monthly });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Monthly });
 
-                repository4.Add(new PriceDbModel() { Cost = 53, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Yearly });
-                repository4.Add(new PriceDbModel() { Cost = 153, PassengerType = PassengerType.Regular, TicketType = TicketType.Yearly });
-                repository4.Add(new PriceDbModel() { Cost = 103, PassengerType = PassengerType.Student, TicketType = TicketType.Yearly });
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Yearly });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Yearly });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Yearly });
 
-                repository4.Add(new PriceDbModel() { Cost = 54, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Time });
-                repository4.Add(new PriceDbModel() { Cost = 154, PassengerType = PassengerType.Regular, TicketType = TicketType.Time });
-                repository4.Add(new PriceDbModel() { Cost = 104, PassengerType = PassengerType.Student, TicketType = TicketType.Time });
+                repository4.Add(new PriceDbModel() { Cost = 50, PassengerType = PassengerType.Pensioner, TicketType = TicketType.Time });
+                repository4.Add(new PriceDbModel() { Cost = 150, PassengerType = PassengerType.Regular, TicketType = TicketType.Time });
+                repository4.Add(new PriceDbModel() { Cost = 100, PassengerType = PassengerType.Student, TicketType = TicketType.Time });
                 #endregion
 
                 dbContext.SaveChanges();
