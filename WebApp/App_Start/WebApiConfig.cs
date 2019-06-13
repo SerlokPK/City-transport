@@ -3,6 +3,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Security.OAuth;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Unity;
 using WebApp.App_Start;
 
@@ -26,6 +27,9 @@ namespace WebApp
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             FluentValidationModelValidatorProvider.Configure(config);
+
+            //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "GET,POST");
+            //config.EnableCors(cors);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

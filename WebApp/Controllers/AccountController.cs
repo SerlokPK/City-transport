@@ -20,7 +20,7 @@ using WebApp.Results;
 namespace WebApp.Controllers
 {
     [Authorize]
-    [EnableCors(origins: "http://localhost:52295/", headers: "*", methods: "*")]
+    //[EnableCors(origins: "http://localhost:4200/", headers: "*", methods: "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
@@ -321,6 +321,7 @@ namespace WebApp.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
+        [HttpPost]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
