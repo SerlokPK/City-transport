@@ -1,8 +1,10 @@
-<nav class="navbar navbar-expand-sm   navbar-light bg-light">
-  <div class="collapse navbar-collapse">
+<nav class="navbar navbar-expand-sm custom_navbar">
+  <div class="collapse navbar-collapse custom_navbar">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="/rides">Red voznje <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/rides"
+          >Red voznje <span class="sr-only">(current)</span></a
+        >
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/lineMap">Mreza linija</a>
@@ -19,22 +21,23 @@
       <li class="nav-item">
         <a class="nav-link" href="/register">Registrujte se</a>
       </li>
-      <div *ngIf='isLoggedIn'>
-        <li class="nav-item">
-          <a class="nav-link" (click)='onLogout()'>Odjavite se</a>
-        </li>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="admin/lines">Uredi linije</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admin/stations">Uredi stanice</a>
-          </li>
-          <!-- <li class="nav-item">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link custom_logout" (click)="onLogout()">Odjavite se</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" href="admin/lines">Uredi linije</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a
+          class="nav-link"
+          href="admin/stations"
+          style="text-decoration: none; color: white;"
+          >Uredi stanice</a
+        >
+      </li>
+      <!-- <li class="nav-item">
             <a class="nav-link" href="admin/prices">Uredi cene</a>
           </li> -->
-        </ul>
-      </div>
     </ul>
   </div>
 </nav>

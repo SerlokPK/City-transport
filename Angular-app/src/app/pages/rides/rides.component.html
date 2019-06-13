@@ -1,35 +1,59 @@
-Red voznje: <select (change)='selectRide($event)' class="browser-default custom-select">
-  <option *ngFor='let ride of rideTypes'>
-    {{ride}}
-  </option>
-</select>
-Dan: <select (change)='selectDay($event)' class="browser-default custom-select">
-  <option *ngFor='let day of dayTypes'>
-    {{day}}
-  </option>
-</select>
-Linija: <select (change)='selectLine($event)' size=5 class="browser-default custom-select">
-  <option *ngFor='let line of lineList' [value]='line.Id'>
-    {{line.Number}} {{line.Name}}
-  </option>
-</select>
-<button class='btn btn-primary' [disabled]='!tempLine' (click)='showDepartureTime()'>PRIKAZI</button>
-<div *ngIf='showTime'>
-  <div>
-    Linija: {{this.selectedLine.Number}} {{this.selectedLine.Name}}
+<div class="custom_redVoznje">
+  Red voznje:
+  <select (change)="selectRide($event)" class="browser-default custom-select">
+    <option *ngFor="let ride of rideTypes">
+      {{ ride }}
+    </option>
+  </select>
+</div>
+<div class="custom_redVoznje">
+  Dan:
+  <select (change)="selectDay($event)" class="browser-default custom-select">
+    <option *ngFor="let day of dayTypes">
+      {{ day }}
+    </option>
+  </select>
+</div>
+<div class="custom_redVoznje">
+  Linija:
+  <select
+    (change)="selectLine($event)"
+    size="5"
+    class="browser-default custom-select"
+  >
+    <option *ngFor="let line of lineList" [value]="line.Id">
+      {{ line.Number }} {{ line.Name }}
+    </option>
+  </select>
+</div>
+<button
+  style="margin-top: 25px;"
+  class="btn btn-primary"
+  [disabled]="!tempLine"
+  (click)="showDepartureTime()"
+>
+  PRIKAZI
+</button>
+<div *ngIf="showTime" style="margin-top: 25px;">
+  <div style="font-size: 25px; text-align: center; vertical-align: center;">
+    Linija: {{ this.selectedLine.Number }} {{ this.selectedLine.Name }}
   </div>
-  <table class="table table-bordered table-dark" width=100%>
+  <table
+    class="table table-bordered table-dark"
+    style="background-color: #3463ad; border-color: white;"
+    width="100%"
+  >
     <tbody>
       <tr>
-        <th>SMER A: {{selectedLine.Name}}</th>
-        <th>SMER B: {{convertLineName(selectedLine.Name)}}</th>
+        <th>SMER A: {{ selectedLine.Name }}</th>
+        <th>SMER B: {{ convertLineName(selectedLine.Name) }}</th>
       </tr>
       <tr>
         <td>
-          <span *ngFor='let time of this.directionA'>{{time}}<br /></span>
+          <span *ngFor="let time of this.directionA">{{ time }}<br /></span>
         </td>
         <td>
-          <span *ngFor='let time of this.directionB'>{{time}}<br /></span>
+          <span *ngFor="let time of this.directionB">{{ time }}<br /></span>
         </td>
       </tr>
     </tbody>

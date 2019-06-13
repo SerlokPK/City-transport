@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.custom_index {
+  background: rgb(239, 239, 239);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}

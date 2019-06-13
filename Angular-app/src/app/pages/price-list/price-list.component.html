@@ -1,27 +1,44 @@
-Tip karte: <select class="browser-default custom-select" (change)='selectCard($event)'>
-  <option *ngFor='let card of cardTypes'>
-    {{card}}
-  </option>
-</select>
-Tip kupca: <select class="browser-default custom-select" (change)='selectPassenger($event)'>
-  <option *ngFor='let passenger of passengerTypes'>
-    {{passenger}}
-  </option>
-</select>
-<div>
-  {{this.selectedCard}} {{this.selectedPassenger}}
+<div style="margin-top:15px;">
+  Tip karte:
+  <select class="browser-default custom-select" (change)="selectCard($event)">
+    <option *ngFor="let card of cardTypes">
+      {{ card }}
+    </option>
+  </select>
 </div>
-<table class="table table-bordered table-dark" width=100%>
-  <tbody>
-    <tr>
-      <th>Cena</th>
-      <th>PDV [%]</th>
-      <th>Ukupno</th>
-    </tr>
-    <tr>
-      <td>{{this.price.Cost}}</td>
-      <td>{{this.pdv}}</td>
-      <td>{{this.calculateFinalSum(this.price.Cost, this.pdv)}}</td>
-    </tr>
-  </tbody>
-</table>
+<div style="margin-top:15px;">
+  Tip kupca:
+  <select
+    class="browser-default custom-select"
+    (change)="selectPassenger($event)"
+  >
+    <option *ngFor="let passenger of passengerTypes">
+      {{ passenger }}
+    </option>
+  </select>
+</div>
+<div
+  style="margin-top:25px; font-size: 25px; text-align: center; vertical-align: center;"
+>
+  <div>{{ this.selectedCard }} {{ this.selectedPassenger }}</div>
+</div>
+<div style="">
+  <table
+    class="table table-bordered"
+    style="background-color: #3463ad; color: white;"
+    width="100%"
+  >
+    <tbody>
+      <tr>
+        <th>Cena</th>
+        <th>PDV [%]</th>
+        <th>Ukupno</th>
+      </tr>
+      <tr>
+        <td>{{ this.price.Cost }}</td>
+        <td>{{ this.pdv }}</td>
+        <td>{{ this.calculateFinalSum(this.price.Cost, this.pdv) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
