@@ -21,21 +21,28 @@ export class UserService {
 
   logOut() {
     this.loggedIn.next(false);
-    const url = `${baseUrl}account/logout`;
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+    const url = `${baseUrl}api/account/logout`;
+    const httpOptions = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
+      }
+    };
     sessionStorage.removeItem('jwt');
     sessionStorage.removeItem('role');
-    return this.http.post<any>(url, {}, { headers: header });
+    return this.http.post<any>(url, {}, httpOptions);
   }
 
   registerUser(user: User): Observable<User> {
-    const url = `${baseUrl}account/register`;
-    const header = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(url, user, { headers: header });
+    const url = `${baseUrl}api/account/register`;
+    // tslint:disable-next-line: max-line-length
+    const userData = `Email=${user.Email}&Password=${user.Password}&Address=${user.Address}&FirstName=${user.FirstName}&LastName=${user.LastName}&DayOfBirth=${user.DayOfBirth}&ConfirmPassword=${user.ConfirmPassword}`;
+    const httpOptions = {
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+      }
+    };
+    return this.http.post<User>(url, userData, httpOptions);
   }
 
   loginUser(user: User, callback: any) {
@@ -64,7 +71,7 @@ export class UserService {
         error => {
           swal.fire({
             title: 'Greska!',
-            text: `${error.message}`,
+            text: `Ne postoji nalog`,
             type: 'error',
             confirmButtonText: 'Ok'
           });
