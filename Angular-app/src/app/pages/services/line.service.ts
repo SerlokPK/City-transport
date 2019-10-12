@@ -39,7 +39,7 @@ export class LineService {
   }
 
   saveLine(line: any) {
-    const url = `${baseUrl}values/Lines`;
+    const url = `${baseUrl}admin/Lines`;
     const header = new HttpHeaders({
       Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
     });
@@ -47,7 +47,7 @@ export class LineService {
   }
 
   updateLine(line: any) {
-    const url = `${baseUrl}values/Lines`;
+    const url = `${baseUrl}admin/Lines`;
     const header = new HttpHeaders({
       Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
     });
