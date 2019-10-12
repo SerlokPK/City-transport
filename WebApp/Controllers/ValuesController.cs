@@ -43,7 +43,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -73,7 +73,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -121,7 +121,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, lineId);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -149,7 +149,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, lineRequest);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -176,7 +176,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -203,7 +203,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -246,7 +246,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stationid);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -274,7 +274,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stationDbModel);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -311,7 +311,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, departureWrapper);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -338,7 +338,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, vehicles);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -367,7 +367,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, price);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -396,7 +396,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, priceId);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -423,7 +423,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
