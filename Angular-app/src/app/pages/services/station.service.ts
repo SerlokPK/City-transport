@@ -28,7 +28,7 @@ export class StationService {
   }
 
   saveStation(station: any) {
-    const url = `${baseUrl}values/Stations`;
+    const url = `${baseUrl}admin/Stations`;
     const header = new HttpHeaders({
       Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
     });
@@ -36,7 +36,7 @@ export class StationService {
   }
 
   updateStation(station: any) {
-    const url = `${baseUrl}values/Stations`;
+    const url = `${baseUrl}admin/Stations`;
     const header = new HttpHeaders({
       Authorization: 'Bearer ' + sessionStorage.getItem('jwt')
     });

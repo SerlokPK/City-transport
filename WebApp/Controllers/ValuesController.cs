@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
+using WebApp.Helpers;
 using WebApp.Models;
 using WebApp.Models.Requests.Get;
 using WebApp.Models.Requests.Post;
 using WebApp.Persistence;
 using WebApp.Persistence.Models;
 using WebApp.Persistence.Repository;
-using static WebApp.AutoMapper.AutoMapperResolver;
 
 namespace WebApp.Controllers
 {
@@ -31,7 +30,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -43,7 +42,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -58,7 +57,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -73,83 +72,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, maps);
                 }
             }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        // POST api/values/lines
-        [HttpPost]
-        [Authorize]
-        [Route("Lines")]
-        public HttpResponseMessage PostLine(HttpRequestMessage request, PostLineRequest lineRequest)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    dbContext.Configuration.LazyLoadingEnabled = false;
-                    dbContext.Configuration.ProxyCreationEnabled = false;
-
-                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
-                    Repository<StationDbModel, int> stationsRepository = new Repository<StationDbModel, int>(dbContext);
-                    Repository<StationLineDbModel, int> stationLineRepository = new Repository<StationLineDbModel, int>(dbContext);
-                    Repository<DepartureDbModel, int> departuresRepository = new Repository<DepartureDbModel, int>(dbContext);
-
-                    var lineDbModel = Mapper.Map<LineDbModel>(lineRequest);
-                    var departures = ResolveDeparturePostRequestToDepartureDbModel(lineRequest.Departures, lineDbModel);
-                    foreach (var stationId in lineRequest.Stations)
-                    {
-                        var stationDbModel = stationsRepository.Get(stationId);
-                        stationLineRepository.Add(new StationLineDbModel()
-                        {
-                            Line = lineDbModel,
-                            Station = stationDbModel
-                        });
-                    }
-
-                    departuresRepository.AddRange(departures);
-                    dbContext.SaveChanges();
-
-                    var lineId = linesRepository.Find(line => line.Number == lineDbModel.Number).First().Id;
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, lineId);
-                }
-            }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        // PUT api/values/lines
-        [HttpPut]
-        [Authorize]
-        [Route("Lines")]
-        public HttpResponseMessage PutLine(HttpRequestMessage request, LineDbModel lineRequest)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
-                    linesRepository.Update(lineRequest);
-
-                    dbContext.SaveChanges();
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, lineRequest);
-                }
-            }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -164,7 +87,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -176,7 +99,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -191,7 +114,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -203,78 +126,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, stations);
                 }
             }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        // POST api/values/stations
-        [HttpPost]
-        [Authorize]
-        [Route("Stations")]
-        public HttpResponseMessage PostStation(HttpRequestMessage request, PostStationRequest postStationRequest)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    Repository<StationDbModel, int> stationsRepository = new Repository<StationDbModel, int>(dbContext);
-                    Repository<LineDbModel, int> linesRepository = new Repository<LineDbModel, int>(dbContext);
-                    Repository<StationLineDbModel, int> stationLineRepository = new Repository<StationLineDbModel, int>(dbContext);
-                    Repository<DepartureDbModel, int> departuresRepository = new Repository<DepartureDbModel, int>(dbContext);
-
-                    var stationDbModel = Mapper.Map<StationDbModel>(postStationRequest);
-
-                    foreach (var lineId in postStationRequest.LineIds)
-                    {
-                        var lineDbModel = linesRepository.Get(lineId);
-                        stationLineRepository.Add(new StationLineDbModel()
-                        {
-                            Line = lineDbModel,
-                            Station = stationDbModel
-                        });
-                    }
-
-                    dbContext.SaveChanges();
-                    var stationid = stationsRepository.Find(station => station.Address == postStationRequest.Address).First().Id;
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stationid);
-                }
-            }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        // POST api/values/stations
-        [HttpPut]
-        [Authorize]
-        [Route("Stations")]
-        public HttpResponseMessage PutStation(HttpRequestMessage request, StationDbModel stationDbModel)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    Repository<StationDbModel, int> stationRepository = new Repository<StationDbModel, int>(dbContext);
-                    stationRepository.Update(stationDbModel);
-
-                    dbContext.SaveChanges();
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, stationDbModel);
-                }
-            }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -289,7 +141,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -311,7 +163,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, departureWrapper);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -326,7 +178,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -338,7 +190,7 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, vehicles);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
@@ -353,7 +205,7 @@ namespace WebApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
+                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, ErrorHelper.GetErrorMessage(ModelState));
                 }
 
                 using (var dbContext = new ApplicationDbContext())
@@ -367,75 +219,10 @@ namespace WebApp.Controllers
                     return request.CreateResponse(System.Net.HttpStatusCode.OK, price);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
             }
-        }
-
-        [HttpPost]
-        [Authorize]
-        [Route("Price")]
-        public HttpResponseMessage PostPrice(HttpRequestMessage request, PostPriceRequest postPriceRequest)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    Repository<PriceDbModel, int> repository = new Repository<PriceDbModel, int>(dbContext);
-                    var priceDbModel = Mapper.Map<PriceDbModel>(postPriceRequest);
-                    repository.Add(priceDbModel);
-                    dbContext.SaveChanges();
-
-                    var priceId = repository.Find(price => price.PassengerType == postPriceRequest.PassengerType && price.TicketType == postPriceRequest.TicketType).First().Id;
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK, priceId);
-                }
-            }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        [HttpPut]
-        [Authorize]
-        [Route("Price")]
-        public HttpResponseMessage PutPrice(HttpRequestMessage request, PriceDbModel priceDbModel)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return request.CreateResponse(System.Net.HttpStatusCode.BadRequest, GetErrorMessage());
-                }
-
-                using (var dbContext = new ApplicationDbContext())
-                {
-                    Repository<PriceDbModel, int> repository = new Repository<PriceDbModel, int>(dbContext);
-                    repository.Update(priceDbModel);
-                    dbContext.SaveChanges();
-
-                    return request.CreateResponse(System.Net.HttpStatusCode.OK);
-                }
-            }
-            catch (Exception e)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
-        }
-
-        private Error GetErrorMessage()
-        {
-            var errorMessage = ModelState.Values.ToList()[0].Errors.FirstOrDefault(e => e.ErrorMessage != "")?.ErrorMessage;
-            return new Error()
-            {
-                ErrorMessage = errorMessage ?? "Bad request."
-            };
         }
     }
 }

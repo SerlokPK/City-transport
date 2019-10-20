@@ -23,12 +23,12 @@ export class PriceService {
   }
 
   savePrice(price: any) {
-    const url = `${baseUrl}values/price`;
+    const url = `${baseUrl}admin/price`;
     return this.http.post<Price>(url, price);
   }
 
   updatePrice(price: any) {
-    const url = `${baseUrl}values/price`;
+    const url = `${baseUrl}admin/price`;
     return this.http.put<Price>(url, price);
   }
 
